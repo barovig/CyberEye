@@ -1,5 +1,5 @@
-#ifndef COLLECTOR_H
-#define COLLECTOR_H
+#ifndef CE_COLLECTOR_H
+#define CE_COLLECTOR_H
 
 namespace ce {
 
@@ -11,4 +11,4 @@ public:
 
 } // namespace ce
 
-#endif // COLLECTOR_H
+#endif // CE_COLLECTOR_H

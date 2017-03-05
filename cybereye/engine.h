@@ -1,5 +1,5 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef CE_ENGINE_H
+#define CE_ENGINE_H
 
 namespace ce {
 
@@ -11,4 +11,4 @@ public:
 
 } // namespace ce
 
-#endif // ENGINE_H
+#endif // CE_ENGINE_H
