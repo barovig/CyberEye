@@ -1,0 +1,7 @@
+--  To use OpenCV different from the one installed locally, 
+    set CMAKE_PREFIX_PATH to point to the directory containing  
+    OpenCV*.cmake files (e.g. -DCMAKE_PREFIX_PATH=/home/username/root/share/OpenCV )
+
+--  To install CyberEye to location different to /usr/local,
+    set CMAKE_INSTALL_PREFIX to install directory of choice
+    e.g. DCMAKE_INSTALL_PREFIX=/home/username/root/
