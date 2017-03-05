@@ -1,10 +1,10 @@
 #include "collector.h"
 
-namespace cybeye {
+namespace ce {
 
 Collector::Collector()
 {
 	
 }
 
-} // namespace cybeye
+} // namespace ce

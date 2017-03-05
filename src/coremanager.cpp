@@ -1,10 +1,10 @@
 #include "coremanager.h"
 #include "opencv/cv.h"
 
-namespace cybeye {
+namespace ce {
 
 CoreManager::CoreManager()
 {
 }
 
-} // namespace cybeye
+} // namespace ce

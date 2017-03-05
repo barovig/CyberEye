@@ -1,7 +1,7 @@
 #ifndef CYBEYE_COREMANAGER_H
 #define CYBEYE_COREMANAGER_H
 
-namespace cybeye {
+namespace ce {
 
 class CoreManager
 {
@@ -11,5 +11,5 @@ public:
 };
 
 
-} // namespace cybeye
+} // namespace ce
 #endif // CYBEYE_COREMANAGER_H

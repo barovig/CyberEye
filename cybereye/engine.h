@@ -1,7 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-namespace cybeye {
+namespace ce {
 
 class Engine
 {
@@ -9,6 +9,6 @@ public:
 	Engine();
 };
 
-} // namespace cybeye
+} // namespace ce
 
 #endif // ENGINE_H

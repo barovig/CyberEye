@@ -1,10 +1,10 @@
 #include "engine.h"
 
-namespace cybeye {
+namespace ce {
 
 Engine::Engine()
 {
 	
 }
 
-} // namespace cybeye
+} // namespace ce

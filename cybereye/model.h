@@ -1,7 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-namespace cybeye {
+namespace ce {
 
 class Model
 {
@@ -9,6 +9,6 @@ public:
 	Model();
 };
 
-} // namespace cybeye
+} // namespace ce
 
 #endif // MODEL_H

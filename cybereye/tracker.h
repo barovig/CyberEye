@@ -1,7 +1,7 @@
 #ifndef TRACKER_H
 #define TRACKER_H
 
-namespace cybeye {
+namespace ce {
 
 class Tracker
 {
@@ -9,6 +9,6 @@ public:
 	Tracker();
 };
 
-} // namespace cybeye
+} // namespace ce
 
 #endif // TRACKER_H

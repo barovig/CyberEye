@@ -1,10 +1,10 @@
 #include "imgobj.h"
 
-namespace cybeye {
+namespace ce {
 
 ImgObj::ImgObj()
 {
 	
 }
 
-} // namespace cybeye
+} // namespace ce

@@ -1,10 +1,10 @@
 #include "model.h"
 
-namespace cybeye {
+namespace ce {
 
 Model::Model()
 {
 	
 }
 
-} // namespace cybeye
+} // namespace ce

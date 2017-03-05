@@ -1,10 +1,10 @@
 #include "tracker.h"
 
-namespace cybeye {
+namespace ce {
 
 Tracker::Tracker()
 {
 	
 }
 
-} // namespace cybeye
+} // namespace ce

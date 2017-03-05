@@ -1,7 +1,7 @@
 #ifndef IMGOBJ_H
 #define IMGOBJ_H
 
-namespace cybeye {
+namespace ce {
 
 class ImgObj
 {
@@ -9,6 +9,6 @@ public:
 	ImgObj();
 };
 
-} // namespace cybeye
+} // namespace ce
 
 #endif // IMGOBJ_H
