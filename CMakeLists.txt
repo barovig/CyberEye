@@ -37,5 +37,6 @@ endif()
 
 message("Install directory: ${CMAKE_INSTALL_PREFIX}")
 message("OpenCV location: ${OpenCV_DIR}")
+message("OpenCV version: ${OpenCV_VERSION}")
 message("\nTo remove CyberEye after 'make install' execute 'xargs rm -rf < install_manifest.txt' from the build directory")
 message("\n")
