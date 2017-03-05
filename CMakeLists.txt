@@ -27,6 +27,15 @@ install(
 	ARCHIVE DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/cybereye)
 install(FILES cybereye.h DESTINATION include)
+
+message("\n")
+if(${BUILD_SHARED_LIBS})
+message("Building library: SHARED")
+else()
+message("Building library: STATIC")
+endif()
+
 message("Install directory: ${CMAKE_INSTALL_PREFIX}")
 message("OpenCV location: ${OpenCV_DIR}")
-message("To remove CyberEye after 'make install' execute 'xargs rm -rf < install_manifest.txt' from the build directory")
+message("\nTo remove CyberEye after 'make install' execute 'xargs rm -rf < install_manifest.txt' from the build directory")
+message("\n")
