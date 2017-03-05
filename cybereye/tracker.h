@@ -1,5 +1,5 @@
-#ifndef TRACKER_H
-#define TRACKER_H
+#ifndef CE_TRACKER_H
+#define CE_TRACKER_H
 
 namespace ce {
 
@@ -11,4 +11,4 @@ public:
 
 } // namespace ce
 
-#endif // TRACKER_H
+#endif // CE_TRACKER_H

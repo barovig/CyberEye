@@ -1,5 +1,5 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef CE_MODEL_H
+#define CE_MODEL_H
 
 namespace ce {
 
@@ -11,4 +11,4 @@ public:
 
 } // namespace ce
 
-#endif // MODEL_H
+#endif // CE_MODEL_H

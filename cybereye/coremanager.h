@@ -1,5 +1,5 @@
-#ifndef CYBEYE_COREMANAGER_H
-#define CYBEYE_COREMANAGER_H
+#ifndef CE_COREMANAGER_H
+#define CE_COREMANAGER_H
 
 namespace ce {
 
@@ -12,4 +12,4 @@ public:
 
 
 } // namespace ce
-#endif // CYBEYE_COREMANAGER_H
+#endif // CE_COREMANAGER_H

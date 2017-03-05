@@ -7,4 +7,11 @@ ImgObj::ImgObj()
 	
 }
 
+ImgObj::ImgObj(cv::Mat data, int id, cv::Point2l location)
+{
+	_img = data;
+	_id = id;
+	_loc = location;
+}
+
 } // namespace ce
