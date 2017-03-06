@@ -10,6 +10,7 @@ set(HEADERS
 		cybereye/imgobj.h
 		cybereye/model.h
 		cybereye/tracker.h
+                cybereye/dispatcher.h
 	)
 set(SOURCES 
 		src/collector.cpp

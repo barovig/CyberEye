@@ -8,7 +8,8 @@ class Collector
 {
 public:
 	Collector();
-	virtual cv::Mat getCurrentFrame() = 0;
+    virtual ~Collector();
+    cv::Mat getCurrentFrame(cv::Mat frame);
 };
 
 } // namespace ce

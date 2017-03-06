@@ -9,10 +9,10 @@ class ImgObj
 private:
 	cv::Mat		_img;
 	int			_id;
-	cv::Point2l	_loc;
+    cv::Point2i	_loc;
 public:
 	ImgObj();
-	ImgObj(cv::Mat data, int id, cv::Point2l location);
+    ImgObj(cv::Mat data, int id, cv::Point2i location);
 };
 
 } // namespace ce

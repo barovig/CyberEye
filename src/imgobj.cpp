@@ -7,7 +7,7 @@ ImgObj::ImgObj()
 	
 }
 
-ImgObj::ImgObj(cv::Mat data, int id, cv::Point2l location)
+ImgObj::ImgObj(cv::Mat data, int id, cv::Point2i location)
 {
 	_img = data;
 	_id = id;
