@@ -1,6 +1,7 @@
 #ifndef BKGSEGMENTATIONENGINE_H
 #define BKGSEGMENTATIONENGINE_H
 #include "engine.h"
+#include <thread>
 
 namespace ce {
 
