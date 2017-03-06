@@ -5,6 +5,12 @@ namespace ce {
 
 class Model
 {
+private:
+
+
+protected:
+
+
 public:
 	Model();
 };

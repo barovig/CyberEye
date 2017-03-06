@@ -13,6 +13,7 @@ private:
 public:
 	ImgObj();
     ImgObj(cv::Mat data, int id, cv::Point2i location);
+    ImgObj(cv::Mat data, int id);
 };
 
 } // namespace ce
