@@ -8,7 +8,7 @@ namespace ce {
 void CoreManager::capture()
 {
     while(true)
-        _frame = _vcap.grab();
+       _vcap.read(_frame);
 }
 
 CoreManager::CoreManager(Engine* engine, Collector* collector, Tracker* tracker)
@@ -40,13 +40,13 @@ CoreManager::CoreManager(Engine* engine, Collector* collector, Tracker* tracker,
 cv::Mat CoreManager::getFrame()
 {
     //return _collector->getCurrentFrame(_frame);
-    return _frame;
+	return _frame;
 }
 
 void CoreManager::startCapture()
 {
-    std::thread t(&CoreManager::capture, this);
-    t.detach();
+	std::thread t(&CoreManager::capture, this);
+	t.detach();
 }
 
 } // namespace ce
