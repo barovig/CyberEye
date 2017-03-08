@@ -2,6 +2,7 @@
 #define BKGSEGMENTATIONENGINE_H
 #include "engine.h"
 #include <thread>
+#include "opencv2/video.hpp"
 
 namespace ce {
 
@@ -11,16 +12,19 @@ private:
     cv::Ptr<cv::BackgroundSubtractor>   _subtractor;
     cv::Mat                             _mask;
     bool                                _update = true;
-    cv::Mat                             _frame;
 
 protected:
     void createSubtractor();
-    void updateImgObjects();
+    void extractObjects();
 
 public:
-    BkgSegmentationEngine(ce::Model *model);
-    void getImgObjects(cv::Mat frame);
+    BkgSegmentationEngine(ce::Model* model);
+	
+    void fillImgObjects(cv::Mat frame);
     void updateSubtractor(cv::Mat frame);
+	void setUpdateFlag(bool update);
+	
+	cv::Mat getMask();
 };
 
 } // namespace ce

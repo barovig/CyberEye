@@ -2,7 +2,7 @@
 
 namespace ce {
 
-Engine::Engine(Model *model)
+Engine::Engine(Model* model)
 {
     _model = model;
 }

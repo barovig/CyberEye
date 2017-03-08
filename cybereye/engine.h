@@ -8,12 +8,12 @@ namespace ce {
 class Engine
 {
 protected:
-    cv::Ptr<ce::Model> _model;
+	cv::Ptr<ce::Model> _model;
 
 public:
     Engine(ce::Model* model);
     virtual ~Engine();
-    virtual void getImgObjects(cv::Mat frame) = 0;
+    virtual void fillImgObjects(cv::Mat frame) = 0;
 
 };
 

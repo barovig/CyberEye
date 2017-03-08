@@ -8,5 +8,6 @@
 #include "cybereye/collector.h"
 #include "cybereye/model.h"
 #include "cybereye/dispatcher.h"
+#include "cybereye/bkgsegmentationengine.h"
 
 #endif //CYBEREYE_H
