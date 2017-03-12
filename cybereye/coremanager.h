@@ -15,22 +15,22 @@ class CoreManager
 private:
 	Engine* _engine;
 	Collector* _collector;
-    Tracker* _tracker;
-    cv::VideoCapture _vcap;
-    cv::Mat _frame;
-	int		_engine_wait_ms = 10;
-
-    void capture();
+	Tracker* _tracker;
+	cv::VideoCapture _vcap;
+	cv::Mat _frame;
+	
+	int _engine_wait_ms = 10;
+	void capture();
 	void segment();
 	void segmentOnce();
 	
 public:
-    CoreManager(Engine* engine, Collector* collector, Tracker* tracker);
-    CoreManager(Engine* engine, Collector* collector, Tracker* tracker, int vcap);
-    CoreManager(Engine* engine, Collector* collector, Tracker* tracker, cv::VideoCapture vcap);
+	CoreManager(Engine* engine, Collector* collector, Tracker* tracker);
+	CoreManager(Engine* engine, Collector* collector, Tracker* tracker, int vcap);
+	CoreManager(Engine* engine, Collector* collector, Tracker* tracker, cv::VideoCapture vcap);
 	
 	cv::Mat getFrame();
-    void startCapture();
+	void startCapture();
 	void startSegmentation(int wait = DEFAULT_ENGINE_TIMEOUT);
 	void triggerSegmentation();
 	void setEngineWait(int wait);
