@@ -1,7 +1,7 @@
 #ifndef CE_COREMANAGER_H
 #define CE_COREMANAGER_H
-#include "opencv2/opencv.hpp"
-//#include "opencv2/videoio.hpp"
+#include "opencv2/core.hpp"
+#include "opencv2/videoio.hpp"
 #include "engine.h"
 #include "tracker.h"
 #include "collector.h"

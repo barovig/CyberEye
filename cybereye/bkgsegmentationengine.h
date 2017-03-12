@@ -22,7 +22,7 @@ public:
 	
     void fillImgObjects(cv::Mat frame);
     void updateSubtractor(cv::Mat frame);
-	void setUpdateFlag(bool update);
+	void setUpdateFlag(int update);
 	
 	cv::Mat getMask();
 };

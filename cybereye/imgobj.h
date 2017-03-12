@@ -1,6 +1,6 @@
 #ifndef CE_IMGOBJ_H
 #define CE_IMGOBJ_H
-#include "opencv2/opencv.hpp"
+#include "opencv2/core.hpp"
 
 namespace ce {
 

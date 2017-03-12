@@ -1,7 +1,7 @@
 #ifndef CE_ENGINE_H
 #define CE_ENGINE_H
 #include "model.h"
-#include "opencv2/opencv.hpp"
+#include "opencv2/core.hpp"
 
 namespace ce {
 

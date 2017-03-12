@@ -1,6 +1,6 @@
 #ifndef CE_COLLECTOR_H
 #define CE_COLLECTOR_H
-#include "opencv2/opencv.hpp"
+#include "opencv2/core.hpp"
 
 namespace ce {
 

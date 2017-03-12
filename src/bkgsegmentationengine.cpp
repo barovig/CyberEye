@@ -4,12 +4,14 @@ namespace ce {
 
 void BkgSegmentationEngine::createSubtractor()
 {
-    _subtractor = cv::createBackgroundSubtractorMOG2();
+    _subtractor = cv::createBackgroundSubtractorMOG2(1000, 25, true);
+	//_subtractor = cv::createBackgroundSubtractorKNN();
 }
 
 void BkgSegmentationEngine::extractObjects()
 {
 
+	
 }
 
 BkgSegmentationEngine::BkgSegmentationEngine(Model *model) :
@@ -36,7 +38,7 @@ void BkgSegmentationEngine::updateSubtractor(cv::Mat frame)
 	_subtractor->apply(frame, _mask, _update);
 }
 
-void BkgSegmentationEngine::setUpdateFlag(bool update)
+void BkgSegmentationEngine::setUpdateFlag(int update)
 {
 	_update = update;
 }
@@ -44,13 +46,6 @@ void BkgSegmentationEngine::setUpdateFlag(bool update)
 //////////// DELETE ME ///////////////
 cv::Mat BkgSegmentationEngine::getMask()
 {
-	cv::Mat mask;
-	_mask.copyTo(mask);
-	if(!mask.empty())
-	{
-		cv::erode(mask, mask, cv::Mat(), cv::Point(-1,-1), 4);
-		cv::dilate(mask, mask, cv::Mat(), cv::Point(-1,-1), 4);
-	}
 	return _mask;
 }
 
