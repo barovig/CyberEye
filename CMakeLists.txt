@@ -31,7 +31,7 @@ install(
 	LIBRARY DESTINATION lib 
 	ARCHIVE DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/cybereye)
-install(FILES cybereye.h DESTINATION include)
+install(FILES ce.h DESTINATION include)
 
 message("\n")
 if(${BUILD_SHARED_LIBS})
