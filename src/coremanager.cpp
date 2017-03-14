@@ -26,30 +26,24 @@ void CoreManager::segmentOnce()
 	_engine->fillImgObjects(_frame);
 }
 
-CoreManager::CoreManager(Engine* engine, Collector* collector, Tracker* tracker)
+CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t) :
+	_engine{e}, _collector{c}, _tracker{t},
+	_vcap{cv::VideoCapture(0)}
 {
-    _engine = engine;
-    _collector = collector;
-    _tracker = tracker;
-    _vcap = cv::VideoCapture(0);
 }
 
 
-CoreManager::CoreManager(Engine* engine, Collector* collector, Tracker* tracker, int vcap)
+CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t, int vcap) :
+	_engine {e}, _collector {c}, _tracker {t},
+	_vcap {cv::VideoCapture(vcap)}
 {
-    _engine = engine;
-    _collector = collector;
-    _tracker = tracker;
-    _vcap = cv::VideoCapture(vcap);
 }
 
 
-CoreManager::CoreManager(Engine* engine, Collector* collector, Tracker* tracker, cv::VideoCapture vcap)
+CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t, cv::VideoCapture vcap) :
+	_engine {e}, _collector {c}, _tracker {t},
+	_vcap {vcap}
 {
-    _engine = engine;
-    _collector = collector;
-    _tracker = tracker;
-    _vcap = vcap;
 }
 
 cv::Mat CoreManager::getFrame()
@@ -73,6 +67,7 @@ void CoreManager::startSegmentation(int wait)
 void CoreManager::triggerSegmentation()
 {
 	std::thread t(&CoreManager::segmentOnce, this);
+	t.detach();
 }
 
 void CoreManager::setEngineWait(int wait_ms)

@@ -8,14 +8,16 @@ namespace ce {
 
 class BkgSegmentationEngine : public Engine
 {
+public:
+	enum Method {BKG_MOG2, BKG_KNN, BKG_THRESH };
+
 private:
     cv::Ptr<cv::BackgroundSubtractor>   _subtractor;
     cv::Mat                             _mask;
     bool                                _update = true;
-
+	Method								_method = BKG_MOG2;
 protected:
     void createSubtractor();
-    void extractObjects();
 
 public:
     BkgSegmentationEngine(ce::Model* model);
@@ -23,7 +25,7 @@ public:
     void fillImgObjects(cv::Mat frame);
     void updateSubtractor(cv::Mat frame);
 	void setUpdateFlag(int update);
-	
+	void setMethod(Method m);
 	cv::Mat getMask();
 };
 

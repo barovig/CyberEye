@@ -13,9 +13,9 @@ const int DEFAULT_ENGINE_TIMEOUT = 50;
 class CoreManager
 {
 private:
-	Engine* _engine;
-	Collector* _collector;
-	Tracker* _tracker;
+	cv::Ptr<Engine> _engine;
+	cv::Ptr<Collector> _collector;
+	cv::Ptr<Tracker> _tracker;
 	cv::VideoCapture _vcap;
 	cv::Mat _frame;
 	
