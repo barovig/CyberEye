@@ -30,7 +30,8 @@ BkgSegmentationEngine::BkgSegmentationEngine(Model *model) :
 void BkgSegmentationEngine::fillImgObjects(cv::Mat frame)
 {
 	//// DELETE ME
-	_subtractor->apply(frame, _mask, _update);
+	if(!frame.empty())
+		_subtractor->apply(frame, _mask, _update);
 	/// //////////////
     // extract individual patches of frame based on mask
 	

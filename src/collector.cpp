@@ -7,11 +7,6 @@ Collector::Collector()
 
 }
 
-Collector::~Collector()
-{
-
-}
-
 cv::Mat Collector::getCurrentFrame(cv::Mat frame)
 {
 	// process frame here

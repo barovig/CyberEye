@@ -8,7 +8,6 @@ class Collector
 {
 public:
 	Collector();
-    virtual ~Collector();
     cv::Mat getCurrentFrame(cv::Mat frame);
 };
 

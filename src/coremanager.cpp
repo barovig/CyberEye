@@ -8,22 +8,26 @@ namespace ce {
 
 void CoreManager::capture()
 {
-    while(true)
+    while(!_vcap_stop.load())
 		_vcap.read(_frame);
 }
 
 void CoreManager::segment()
 {
-	while(true)
+	while(!_engine_stop.load())
 	{
-		_engine->fillImgObjects(_frame);
-		std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait_ms));
+		if(!_frame.empty())
+		{
+			_engine->fillImgObjects(_frame);
+			std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait_ms));
+		}
 	}
 }
 
 void CoreManager::segmentOnce()
 {
-	_engine->fillImgObjects(_frame);
+	if(!_frame.empty())	
+		_engine->fillImgObjects(_frame);
 }
 
 CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t) :
@@ -46,6 +50,11 @@ CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t, cv::VideoCapture v
 {
 }
 
+CoreManager::~CoreManager()
+{
+	stopAllThreads();
+}
+
 cv::Mat CoreManager::getFrame()
 {
     return _collector->getCurrentFrame(_frame);
@@ -53,6 +62,7 @@ cv::Mat CoreManager::getFrame()
 
 void CoreManager::startCapture()
 {
+	_vcap_stop.store(false);
 	std::thread t(&CoreManager::capture, this);
 	t.detach();
 }
@@ -60,6 +70,7 @@ void CoreManager::startCapture()
 void CoreManager::startSegmentation(int wait)
 {
 	setEngineWait(wait);
+	_engine_stop.store(false);
 	std::thread t(&CoreManager::segment, this);
 	t.detach();	
 }
@@ -73,6 +84,17 @@ void CoreManager::triggerSegmentation()
 void CoreManager::setEngineWait(int wait_ms)
 {
 	_engine_wait_ms = wait_ms;
+}
+
+void CoreManager::stopAllThreads()
+{
+	_engine_stop.store(true);
+	_vcap_stop.store(true);
+	_collector_stop.store(true);
+	_tracker_stop.store(true);
+	
+	// give engine a chance to stop
+	std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait_ms*2));
 }
 
 } // namespace ce
