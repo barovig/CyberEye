@@ -1,5 +1,6 @@
 #ifndef BKGSEGMENTATIONENGINE_H
 #define BKGSEGMENTATIONENGINE_H
+#include "backgroundsubtractorth.h"
 #include "engine.h"
 #include <thread>
 #include "opencv2/video.hpp"

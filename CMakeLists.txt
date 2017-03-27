@@ -13,6 +13,7 @@ set(HEADERS
 				cybereye/dispatcher.h
 				cybereye/bkgsegmentationengine.h
 				cybereye/cybereye.h
+				cybereye/backgroundsubtractorth.h
 	)
 set(SOURCES 
 				src/cybereye.cpp
@@ -23,6 +24,7 @@ set(SOURCES
 				src/model.cpp
 				src/tracker.cpp
 				src/bkgsegmentationengine.cpp
+				src/backgroundsubtractorth.cpp
 ${HEADERS} #QtCreator hack to display headers
 	)
 add_library(cybereye ${SOURCES})

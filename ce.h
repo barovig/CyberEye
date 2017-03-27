@@ -9,5 +9,6 @@
 #include "cybereye/model.h"
 #include "cybereye/dispatcher.h"
 #include "cybereye/bkgsegmentationengine.h"
+#include "cybereye/backgroundsubtractorth.h"
 
 #endif // CE_H

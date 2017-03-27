@@ -13,7 +13,7 @@ void BkgSegmentationEngine::createSubtractor()
 		_subtractor = cv::createBackgroundSubtractorKNN();
 		break;
 	case BKG_THRESH:
-		_subtractor = cv::createBackgroundSubtractorMOG2();
+		_subtractor = new BackgroundSubtractorTH();
 		break;
 	default:
 		_subtractor = cv::createBackgroundSubtractorMOG2();
