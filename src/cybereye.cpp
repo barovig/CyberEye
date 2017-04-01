@@ -4,7 +4,7 @@ namespace ce {
 
 CyberEye::CyberEye()
 {
-	_model = new Model();
+	_model = new ce::ObjCollection();
 	_manager = new CoreManager(new BkgSegmentationEngine(_model), new Collector(), new Tracker(), 0);
 }
 

@@ -4,16 +4,20 @@ project(cybereye)
 find_package(OpenCV 3)
 include_directories(cybereye)
 set(HEADERS
+				# Interfaces
 				cybereye/collector.h
 				cybereye/coremanager.h
 				cybereye/engine.h
 				cybereye/imgobj.h
-				cybereye/model.h
 				cybereye/tracker.h
 				cybereye/dispatcher.h
+				cybereye/receiver.h
+				cybereye/collection.h
+				#Realisations
 				cybereye/bkgsegmentationengine.h
 				cybereye/cybereye.h
-				cybereye/backgroundsubtractorth.h
+				cybereye/objectdispatcher.h
+				cybereye/objcollection.h
 	)
 set(SOURCES 
 				src/cybereye.cpp
@@ -21,10 +25,10 @@ set(SOURCES
 				src/coremanager.cpp
 				src/engine.cpp
 				src/imgobj.cpp
-				src/model.cpp
 				src/tracker.cpp
 				src/bkgsegmentationengine.cpp
-				src/backgroundsubtractorth.cpp
+				src/objectdispatcher.cpp
+				src/objcollection.cpp
 ${HEADERS} #QtCreator hack to display headers
 	)
 add_library(cybereye ${SOURCES})

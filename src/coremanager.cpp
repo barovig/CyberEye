@@ -1,5 +1,6 @@
 #include <thread>
 #include <chrono>
+#include <iostream>
 
 #include "coremanager.h"
 #include "opencv/cv.h"
@@ -14,12 +15,17 @@ void CoreManager::capture()
 
 void CoreManager::segment()
 {
+	int wait = _engine->getEngineWait();
 	while(!_engine_stop.load())
 	{
 		if(!_frame.empty())
 		{
-			_engine->fillImgObjects(_frame);
-			std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait_ms));
+			// Need a local copy, since _frame can be updated by
+			// video capturing thread
+			cv::Mat frame;
+			_frame.copyTo(frame);
+			_engine->fillImgObjects(frame);
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait));
 		}
 	}
 }
@@ -62,14 +68,19 @@ cv::Mat CoreManager::getFrame()
 
 void CoreManager::startCapture()
 {
-	_vcap_stop.store(false);
-	std::thread t(&CoreManager::capture, this);
-	t.detach();
+	if(_vcap.isOpened()){
+		_vcap_stop.store(false);
+		std::thread t(&CoreManager::capture, this);
+		t.detach();
+	}
+	else
+	{
+		std::cerr << "VideoCapture is closed" << std::endl;
+	}
 }
 
-void CoreManager::startSegmentation(int wait)
+void CoreManager::startSegmentation()
 {
-	setEngineWait(wait);
 	_engine_stop.store(false);
 	std::thread t(&CoreManager::segment, this);
 	t.detach();	
@@ -81,11 +92,6 @@ void CoreManager::triggerSegmentation()
 	t.detach();
 }
 
-void CoreManager::setEngineWait(int wait_ms)
-{
-	_engine_wait_ms = wait_ms;
-}
-
 void CoreManager::stopAllThreads()
 {
 	_engine_stop.store(true);
@@ -94,7 +100,7 @@ void CoreManager::stopAllThreads()
 	_tracker_stop.store(true);
 	
 	// give engine a chance to stop
-	std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait_ms*2));
+	std::this_thread::sleep_for(std::chrono::milliseconds(_engine->getEngineWait()*2));
 }
 
 } // namespace ce

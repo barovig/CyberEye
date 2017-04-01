@@ -2,14 +2,14 @@
 
 namespace ce {
 
-Engine::Engine(Model* model)
+Engine::Engine(Collection* model)
 {
     _model = model;
 }
 
 Engine::~Engine()
 {
-
+	
 }
 
 } // namespace ce

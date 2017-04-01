@@ -1,5 +1,5 @@
-#ifndef BKGSEGMENTATIONENGINE_H
-#define BKGSEGMENTATIONENGINE_H
+#ifndef CE_BKGSEGMENTATIONENGINE_H
+#define CE_BKGSEGMENTATIONENGINE_H
 #include "backgroundsubtractorth.h"
 #include "engine.h"
 #include <thread>
@@ -10,26 +10,36 @@ namespace ce {
 class BkgSegmentationEngine : public Engine
 {
 public:
-	enum Method {BKG_MOG2, BKG_KNN, BKG_THRESH };
-
+	enum Method {BKG_MOG2, BKG_KNN,};
+	
 private:
     cv::Ptr<cv::BackgroundSubtractor>   _subtractor;
     cv::Mat                             _mask;
-    bool                                _update = true;
+    int								    _update = -1;
 	Method								_method = BKG_MOG2;
+	int									_engine_wait_ms = 10;
+	// gaussian blur default params
+	cv::Size							_kernel_sz = cv::Size(5,5);
+	int									_kernel_sigmaX = 5;
 protected:
     void createSubtractor();
-
-public:
-    BkgSegmentationEngine(ce::Model* model);
 	
+public:
+    BkgSegmentationEngine(ce::Collection* model);
+	BkgSegmentationEngine(ce::Collection* model, Method method);
+	// Segments 'frame' and populates _model with ImgObjs
     void fillImgObjects(cv::Mat frame);
+	int  getEngineWait();
+	// Returns mask for foreground objects
+	cv::Mat getMask();	
     void updateSubtractor(cv::Mat frame);
 	void setUpdateFlag(int update);
 	void setMethod(Method m);
-	cv::Mat getMask();
+	void setEngineWait(int ms);
+	// set parameters for GaussianBlur - convolution kernel and sigmaX
+	void setBlurParams(cv::Size sz, int sigmaX);
 };
 
 } // namespace ce
 
-#endif // BKGSEGMENTATIONENGINE_H
+#endif // CE_BKGSEGMENTATIONENGINE_H

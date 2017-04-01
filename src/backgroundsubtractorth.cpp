@@ -12,7 +12,7 @@ void BackgroundSubtractorTH::setLowThreshold(float scale)
 	cv::split( IlowF, Ilow );	
 }
 
-void BackgroundSubtractorTH::AllocateImages(const cv::Mat &I)
+void BackgroundSubtractorTH::AllocateImages(const cv::InputArray &I)
 {
 	cv::Size sz = I.size();
 	
@@ -29,8 +29,9 @@ void BackgroundSubtractorTH::AllocateImages(const cv::Mat &I)
 	Imaskt = cv::Mat::zeros( sz, CV_32FC3 );	
 }
 
-void BackgroundSubtractorTH::accumulateBackground(cv::Mat &I)
+void BackgroundSubtractorTH::accumulateBackground(const cv::Mat &input)
 {
+	cv::Mat I(input);
 	static int first = 1;
 	I.convertTo( tmp, CV_32F );
 	if( !first ){
@@ -54,8 +55,9 @@ void BackgroundSubtractorTH::createModelsfromStats()
 	setLowThreshold( 6.0 );	
 }
 
-void BackgroundSubtractorTH::backgroundDiff(cv::Mat &I, cv::Mat &Imask)
+void BackgroundSubtractorTH::backgroundDiff(const cv::Mat &input, cv::Mat &Imask)
 {
+	cv::Mat I(input);	
 	I.convertTo( tmp, CV_32FC1 );
 	// To float
 	cv::split( tmp, Igray );
@@ -75,6 +77,11 @@ void BackgroundSubtractorTH::backgroundDiff(cv::Mat &I, cv::Mat &Imask)
 	Imask = 255 - Imask;
 }
 
+void BackgroundSubtractorTH::clear()
+{
+	AllocateImages(IprevF);
+}
+
 BackgroundSubtractorTH::BackgroundSubtractorTH()
 {
 	
@@ -82,9 +89,27 @@ BackgroundSubtractorTH::BackgroundSubtractorTH()
 
 void BackgroundSubtractorTH::apply(cv::InputArray image, cv::OutputArray fgmask, double learningRate)
 {
-	cv::Mat im = image.getMat();
-	cv::Mat fgm = fgmask.getMat();
-	backgroundDiff(im, fgm);
+	cv::Mat fgmaskMat = fgmask.getMat();
+	// if first call - allocate images
+	if(IavgF.empty())
+	{
+		AllocateImages(image);
+	}
+	// if learning Rate is 0 - accumulate background
+	if(learningRate == 0)
+	{
+		accumulateBackground(image.getMat());
+	}
+	else
+	{
+		if(!_modelCreated){
+			createModelsfromStats();
+			_modelCreated = true;			
+		}
+
+		backgroundDiff(image.getMat(), fgmaskMat);			
+	}
+
 }
 
 void BackgroundSubtractorTH::getBackgroundImage(cv::OutputArray backgroundImage) const

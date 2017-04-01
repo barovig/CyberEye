@@ -2,22 +2,35 @@
 
 namespace ce {
 
-ImgObj::ImgObj()
+ImgObj::ImgObj(cv::Mat data, int id, cv::Point2i location, cv::Size size) :
+	_img{data}, _id{id}, _loc{location}, _size{size}
 {
-	
 }
 
-ImgObj::ImgObj(cv::Mat data, int id, cv::Point2i location)
+
+ImgObj::ImgObj(cv::Mat data, int id) : 
+	_img{data}, _id{id}
 {
-	_img = data;
-	_id = id;
-    _loc = location;
 }
 
-ImgObj::ImgObj(cv::Mat data, int id)
+void ImgObj::setLocation(cv::Point loc)
 {
-    _img = data;
-    _id = id;
+	_loc = loc;
+}
+
+void ImgObj::setSize(cv::Size size)
+{
+	_size = size;
+}
+
+void ImgObj::setFeatures(std::vector<cv::Point2f> features)
+{
+	_features = features;
+}
+
+ImgObj::ImgObj(int id, cv::Point location, cv::Size size) : 
+	_id{id}, _loc{location}, _size{size}
+{
 }
 
 } // namespace ce

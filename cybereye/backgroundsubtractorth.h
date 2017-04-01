@@ -5,7 +5,7 @@
 
 class BackgroundSubtractorTH : public cv::BackgroundSubtractor
 {
-private:
+public:
 	cv::Mat IavgF, IdiffF, IprevF, IhiF, IlowF;
 	cv::Mat tmp, tmp2;
 	// Float, 1-channel images
@@ -17,12 +17,14 @@ private:
 	// Counts number of images learned for averaging later
 	float Icount;
 	
+	bool _modelCreated = false;
 	void setHighThreshold( float scale );
 	void setLowThreshold( float scale );	
-	void AllocateImages( const cv::Mat& I );
-	void accumulateBackground( cv::Mat& I );
+	void AllocateImages( const cv::InputArray& I );
+	void accumulateBackground( const cv::Mat& I );
 	void createModelsfromStats();
-	void backgroundDiff(cv::Mat& I,cv::Mat& Imask);	
+	void backgroundDiff(const cv::Mat &I, cv::Mat &Imask);
+	void clear();
 	
 	
 public:

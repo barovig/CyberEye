@@ -1,14 +1,16 @@
-#ifndef DISPATCHER_H
-#define DISPATCHER_H
+#ifndef CE_DISPATCHER_H
+#define CE_DISPATCHER_H
+#include "imgobj.h"
 
-namespace cybeye {
+namespace ce {
 
+// dispatcher interface
 class Dispatcher
 {
 public:
-	Dispatcher();
+	virtual void dispatchObject(ce::ImgObj obj) = 0;
 };
 
 } // namespace cybeye
 
-#endif // DISPATCHER_H
+#endif // CE_DISPATCHER_H
