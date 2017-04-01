@@ -5,13 +5,14 @@ namespace ce {
 CyberEye::CyberEye()
 {
 	_model = new ce::ObjCollection();
-	_manager = new CoreManager(new BkgSegmentationEngine(_model), new Collector(), new Tracker(), 0);
+	_engine = new ce::BkgSegmentationEngine(_model, BkgSegmentationEngine::BKG_MOG2);
+	_tracker = new ce::ObjTracker();
+	_collector = new ce::ImgCollector();
+	_manager = new CoreManager(_engine, _collector, _tracker, 0);
 }
 
 CyberEye::~CyberEye()
 {
-	delete _model;
-	delete _manager;
 }
 
 } // namespace ce

@@ -1,6 +1,9 @@
 #ifndef CE_CYBEREYE_H
 #define CE_CYBEREYE_H
 #include "coremanager.h"
+#include "objcollection.h"
+#include "objtracker.h"
+#include "imgcollector.h"
 #include "bkgsegmentationengine.h"
 
 namespace ce {
@@ -8,8 +11,11 @@ namespace ce {
 class CyberEye
 {
 private:
-	cv::Ptr<CoreManager> _manager;
-	cv::Ptr<Collection>	 _model;
+	cv::Ptr<ce::CoreManager>	_manager;
+	cv::Ptr<ce::Engine>			_engine;
+	cv::Ptr<ce::Collector>		_collector;
+	cv::Ptr<ce::Tracker>		_tracker;
+	cv::Ptr<ce::Collection>		_model;
 public:
 	CyberEye();
 	~CyberEye();

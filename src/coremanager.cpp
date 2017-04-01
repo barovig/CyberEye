@@ -63,7 +63,7 @@ CoreManager::~CoreManager()
 
 cv::Mat CoreManager::getFrame()
 {
-    return _collector->getCurrentFrame(_frame);
+    return _collector->getFrame(_frame);
 }
 
 void CoreManager::startCapture()
