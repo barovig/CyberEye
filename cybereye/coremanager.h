@@ -29,6 +29,7 @@ private:
 	std::atomic_bool _engine_stop {false};
 	std::atomic_bool _collector_stop {false};
 	std::atomic_bool _tracker_stop {false};
+	int				 _engine_wait;			// engine might be deallocated, don't rely on getEngineWait()
 	
 	// thread procedures
 	void capture();
@@ -38,9 +39,9 @@ private:
 	void segmentOnce();
 	
 public:
-	CoreManager(Engine* engine, Collector* collector, Tracker* tracker);
-	CoreManager(Engine* engine, Collector* collector, Tracker* tracker, int vcap);
-	CoreManager(Engine* engine, Collector* collector, Tracker* tracker, cv::VideoCapture vcap);
+	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker);
+	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, int vcap);
+	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, cv::VideoCapture vcap);
 	~CoreManager();
 	
 	void getFrame(cv::Mat& frame);

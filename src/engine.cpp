@@ -2,7 +2,7 @@
 
 namespace ce {
 
-Engine::Engine(Collection* model)
+Engine::Engine(cv::Ptr<Collection> model)
 {
     _model = model;
 }

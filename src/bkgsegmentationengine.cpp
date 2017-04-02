@@ -18,13 +18,13 @@ void BkgSegmentationEngine::createSubtractor()
 	}
 }
 
-BkgSegmentationEngine::BkgSegmentationEngine(Collection *model) :
+BkgSegmentationEngine::BkgSegmentationEngine(cv::Ptr<Collection> model) :
     Engine::Engine(model)
 {
 	createSubtractor();
 }
 
-BkgSegmentationEngine::BkgSegmentationEngine(Collection *model, BkgSegmentationEngine::Method method) :
+BkgSegmentationEngine::BkgSegmentationEngine(cv::Ptr<Collection> model, BkgSegmentationEngine::Method method) :
 	Engine::Engine(model)
 {
 	_method = method;

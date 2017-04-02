@@ -35,29 +35,32 @@ void CoreManager::segmentOnce()
 		_engine->fillImgObjects(_frame);
 }
 
-CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t) :
+CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracker> t) :
 	_engine{e}, _collector{c}, _tracker{t},
 	_vcap{cv::VideoCapture(0)}
 {
+	_engine_wait = e->getEngineWait();
 }
 
 
-CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t, int vcap) :
+CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracker> t, int vcap) :
 	_engine {e}, _collector {c}, _tracker {t},
 	_vcap {cv::VideoCapture(vcap)}
 {
+	_engine_wait = e->getEngineWait();
 }
 
 
-CoreManager::CoreManager(Engine* e, Collector* c, Tracker* t, cv::VideoCapture vcap) :
+CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracker> t, cv::VideoCapture vcap) :
 	_engine {e}, _collector {c}, _tracker {t},
 	_vcap {vcap}
 {
+	_engine_wait = e->getEngineWait();
 }
 
 CoreManager::~CoreManager()
 {
-	stopAllThreads();
+	//stopAllThreads();
 }
 
 void CoreManager::getFrame(cv::Mat& frame)
@@ -100,13 +103,16 @@ void CoreManager::triggerSegmentation()
 
 void CoreManager::stopAllThreads()
 {
-	_engine_stop.store(true);
-	_vcap_stop.store(true);
-	_collector_stop.store(true);
-	_tracker_stop.store(true);
-	
-	// give engine a chance to stop
-	std::this_thread::sleep_for(std::chrono::milliseconds(_engine->getEngineWait()*2));
+	if(_engine_stop.load() || _vcap_stop.load() || 
+			_collector_stop.load() || _tracker_stop.load()){
+		_engine_stop.store(true);
+		_vcap_stop.store(true);
+		_collector_stop.store(true);
+		_tracker_stop.store(true);
+		
+		// give engine a chance to stop
+		std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait*2));
+	}
 }
 
 } // namespace ce

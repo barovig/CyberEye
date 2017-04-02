@@ -24,8 +24,8 @@ protected:
     void createSubtractor();
 	
 public:
-    BkgSegmentationEngine(ce::Collection* model);
-	BkgSegmentationEngine(ce::Collection* model, Method method);
+    BkgSegmentationEngine(cv::Ptr<Collection> model);
+	BkgSegmentationEngine(cv::Ptr<Collection> model, Method method);
 	// Segments 'frame' and populates _model with ImgObjs
     void fillImgObjects(cv::Mat frame);
 	int  getEngineWait();
