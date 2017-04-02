@@ -22,8 +22,7 @@ void CoreManager::segment()
 		{
 			// Need a local copy, since _frame can be updated by
 			// video capturing thread
-			cv::Mat frame;
-			_frame.copyTo(frame);
+			cv::Mat frame = _frame.clone();
 			_engine->fillImgObjects(frame);
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait));
 		}
@@ -61,9 +60,11 @@ CoreManager::~CoreManager()
 	stopAllThreads();
 }
 
-cv::Mat CoreManager::getFrame()
+void CoreManager::getFrame(cv::Mat& frame)
 {
-    return _collector->getFrame(_frame);
+	// create local copy of current frame, before passing to Collector
+	const cv::Mat localFrame = _frame.clone();
+    _collector->getFrame(localFrame, frame);
 }
 
 void CoreManager::startCapture()
@@ -84,6 +85,11 @@ void CoreManager::startSegmentation()
 	_engine_stop.store(false);
 	std::thread t(&CoreManager::segment, this);
 	t.detach();	
+}
+
+void CoreManager::startTracking()
+{
+	
 }
 
 void CoreManager::triggerSegmentation()

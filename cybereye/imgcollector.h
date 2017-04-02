@@ -11,7 +11,7 @@ public:
 	
 	// Collector interface
 public:
-	cv::Mat getFrame(cv::Mat frame);
+	void getFrame(const cv::Mat& input, cv::Mat& output);
 };
 
 } // namespace ce

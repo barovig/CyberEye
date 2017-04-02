@@ -13,6 +13,11 @@ ImgObj::ImgObj(cv::Mat data, int id) :
 {
 }
 
+ImgObj::ImgObj(int id, cv::Point location, cv::Size size) : 
+	_id{id}, _loc{location}, _size{size}
+{
+}
+
 void ImgObj::setLocation(cv::Point loc)
 {
 	_loc = loc;
@@ -28,9 +33,6 @@ void ImgObj::setFeatures(std::vector<cv::Point2f> features)
 	_features = features;
 }
 
-ImgObj::ImgObj(int id, cv::Point location, cv::Size size) : 
-	_id{id}, _loc{location}, _size{size}
-{
-}
+
 
 } // namespace ce

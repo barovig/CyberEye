@@ -12,8 +12,9 @@ private:
 protected:
 
 public:
-	Collection();
-	virtual ~Collection();
+	Collection() {}
+	virtual ~Collection(){}
+	
 	virtual void add(ce::ImgObj img) = 0;
 	virtual void remove(int id) = 0;
 	

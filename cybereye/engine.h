@@ -11,7 +11,7 @@ protected:
 	cv::Ptr<ce::Collection> _model;
 public:
     Engine(ce::Collection* model);
-    virtual			~Engine();
+	virtual			~Engine(){}
     virtual void	fillImgObjects(cv::Mat frame) = 0;
 	virtual int		getEngineWait() = 0;
 };

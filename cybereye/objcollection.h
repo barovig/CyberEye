@@ -10,15 +10,13 @@ private:
 	std::vector<ce::ImgObj> _images;
 public:
 	ObjCollection();
-	
-	
 	// Collection interface
 public:
 	void add(ImgObj img);
 	void remove(int id);
 	const std::vector<ce::ImgObj> &getImgObjects();
 	void updateLocation(int id, cv::Point location, cv::Size sz);
-	void updateLabel(int id, std::__cxx11::string label);
+	void updateLabel(int id, std::string label);
 };
 
 } // namespace ce

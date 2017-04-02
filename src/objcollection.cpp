@@ -7,25 +7,25 @@ ObjCollection::ObjCollection()
 	
 }
 
+void ObjCollection::ObjCollection::add(ImgObj img)
+{
+}
+
+void ObjCollection::ObjCollection::remove(int id)
+{
+}
+
+const std::vector<ce::ImgObj> &ObjCollection::ObjCollection::getImgObjects()
+{
+	return _images;
+}
+
+void ObjCollection::ObjCollection::updateLocation(int id, cv::Point location, cv::Size sz)
+{
+}
+
+void ObjCollection::ObjCollection::updateLabel(int id, std::string label)
+{
+}
+
 } // namespace ce
-
-
-void ce::ObjCollection::add(ImgObj img)
-{
-}
-
-void ce::ObjCollection::remove(int id)
-{
-}
-
-const std::vector<ce::ImgObj> &ce::ObjCollection::getImgObjects()
-{
-}
-
-void ce::ObjCollection::updateLocation(int id, cv::Point location, cv::Size sz)
-{
-}
-
-void ce::ObjCollection::updateLabel(int id, std::__cxx11::string label)
-{
-}

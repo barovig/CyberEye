@@ -11,14 +11,24 @@ namespace ce {
 class CyberEye
 {
 private:
-	cv::Ptr<ce::CoreManager>	_manager;
-	cv::Ptr<ce::Engine>			_engine;
-	cv::Ptr<ce::Collector>		_collector;
-	cv::Ptr<ce::Tracker>		_tracker;
-	cv::Ptr<ce::Collection>		_model;
+	cv::Ptr<ce::CoreManager>			_manager;
+	cv::Ptr<ce::BkgSegmentationEngine>	_engine;
+	cv::Ptr<ce::ImgCollector>			_collector;
+	cv::Ptr<ce::ObjTracker>				_tracker;
+	cv::Ptr<ce::ObjCollection>			_model;
+	int									_vcap_index;
 public:
 	CyberEye();
+	CyberEye(int vcap);
 	~CyberEye();
+	void initialise();
+	void start();
+	void stop();
+	// pass frame as ouptut arg
+	void getFrame(cv::Mat& frame);
+	
+	// debugging methods
+	cv::Mat getMask();
 };
 
 } // namespace ce

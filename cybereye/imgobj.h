@@ -14,7 +14,6 @@ private:
 	std::vector<cv::Point2f>	_features;
 	
 public:
-	ImgObj();
     ImgObj(cv::Mat data, int id, cv::Point2i location, cv::Size size);
     ImgObj(cv::Mat data, int id);
 	ImgObj(int id, cv::Point2i location, cv::Size size);

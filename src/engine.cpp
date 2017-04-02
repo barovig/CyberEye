@@ -7,9 +7,4 @@ Engine::Engine(Collection* model)
     _model = model;
 }
 
-Engine::~Engine()
-{
-	
-}
-
 } // namespace ce

@@ -10,7 +10,7 @@ ImgCollector::ImgCollector()
 } // namespace ce
 
 
-cv::Mat ce::ImgCollector::getFrame(cv::Mat frame)
+void ce::ImgCollector::getFrame(const cv::Mat& input, cv::Mat& output)
 {
-	return frame;
+	input.copyTo(output);
 }

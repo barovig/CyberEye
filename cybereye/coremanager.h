@@ -16,11 +16,11 @@ class CoreManager
 {
 private:
 	// Core elements
-	cv::Ptr<Engine> _engine;
-	cv::Ptr<Collector> _collector;
-	cv::Ptr<Tracker> _tracker;
-	cv::VideoCapture _vcap;
-	cv::Mat _frame;
+	cv::Ptr<Engine>		_engine;
+	cv::Ptr<Collector>	_collector;
+	cv::Ptr<Tracker>	_tracker;
+	cv::VideoCapture	_vcap;
+	cv::Mat				_frame;
 	
 	//std::atomic<cv::Mat> _frame;
 	
@@ -43,9 +43,10 @@ public:
 	CoreManager(Engine* engine, Collector* collector, Tracker* tracker, cv::VideoCapture vcap);
 	~CoreManager();
 	
-	cv::Mat getFrame();
+	void getFrame(cv::Mat& frame);
 	void startCapture();
 	void startSegmentation();
+	void startTracking();
 	void triggerSegmentation();	
 	void stopAllThreads();
 	
