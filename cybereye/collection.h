@@ -15,7 +15,7 @@ public:
 	Collection() {}
 	virtual ~Collection(){}
 	
-	virtual void add(ce::ImgObj img) = 0;
+	virtual void add(cv::Mat &img, cv::Point pt, cv::Size sz) = 0;
 	virtual void remove(int id) = 0;
 	
 	// return a const reference to private vector of img objects.

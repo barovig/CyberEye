@@ -5,6 +5,7 @@
 #include "objtracker.h"
 #include "imgcollector.h"
 #include "bkgsegmentationengine.h"
+#include "opencv2/imgproc.hpp"
 
 namespace ce {
 
@@ -29,6 +30,7 @@ public:
 	
 	// debugging methods
 	cv::Mat getMask();
+	const std::vector<ce::ImgObj>& getImages();
 };
 
 } // namespace ce

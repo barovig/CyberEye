@@ -11,15 +11,16 @@ private:
 	int							_id;
     cv::Point					_loc;
 	cv::Size					_size;
-	std::vector<cv::Point2f>	_features;
+	std::vector<cv::Point>	_features;
 	
 public:
-    ImgObj(cv::Mat data, int id, cv::Point2i location, cv::Size size);
+    ImgObj(cv::Mat data, int id, cv::Point location, cv::Size size);
     ImgObj(cv::Mat data, int id);
-	ImgObj(int id, cv::Point2i location, cv::Size size);
+	ImgObj(int id, cv::Point location, cv::Size size);
 	void setLocation(cv::Point loc);
 	void setSize(cv::Size size);
-	void setFeatures(std::vector<cv::Point2f> features);
+	void setFeatures(std::vector<cv::Point> features);
+	const cv::Mat& getImgData();
 };
 
 } // namespace ce

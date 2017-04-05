@@ -29,7 +29,8 @@ private:
 	std::atomic_bool _engine_stop {false};
 	std::atomic_bool _collector_stop {false};
 	std::atomic_bool _tracker_stop {false};
-	int				 _engine_wait;			// engine might be deallocated, don't rely on getEngineWait()
+	int				 _engine_wait_ms;
+	int				 _stop_thread_wait_ms = 500; //wait half-second for threads to finish			
 	
 	// thread procedures
 	void capture();

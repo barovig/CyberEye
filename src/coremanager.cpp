@@ -39,7 +39,7 @@ CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracke
 	_engine{e}, _collector{c}, _tracker{t},
 	_vcap{cv::VideoCapture(0)}
 {
-	_engine_wait = e->getEngineWait();
+	_engine_wait_ms = e->getEngineWait();
 }
 
 
@@ -47,7 +47,7 @@ CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracke
 	_engine {e}, _collector {c}, _tracker {t},
 	_vcap {cv::VideoCapture(vcap)}
 {
-	_engine_wait = e->getEngineWait();
+	_engine_wait_ms = e->getEngineWait();
 }
 
 
@@ -55,12 +55,12 @@ CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracke
 	_engine {e}, _collector {c}, _tracker {t},
 	_vcap {vcap}
 {
-	_engine_wait = e->getEngineWait();
+	_engine_wait_ms = e->getEngineWait();
 }
 
 CoreManager::~CoreManager()
 {
-	//stopAllThreads();
+//	stopAllThreads();
 }
 
 void CoreManager::getFrame(cv::Mat& frame)
@@ -103,15 +103,18 @@ void CoreManager::triggerSegmentation()
 
 void CoreManager::stopAllThreads()
 {
-	if(_engine_stop.load() || _vcap_stop.load() || 
-			_collector_stop.load() || _tracker_stop.load()){
+	if(!(_engine_stop.load() && 
+		 _vcap_stop.load() && 
+		 _collector_stop.load() &&
+		 _tracker_stop.load()))
+	{
 		_engine_stop.store(true);
 		_vcap_stop.store(true);
 		_collector_stop.store(true);
 		_tracker_stop.store(true);
 		
-		// give engine a chance to stop
-		std::this_thread::sleep_for(std::chrono::milliseconds(_engine_wait*2));
+		// give engine a chance to stop (sum of preset wait + engine wait)
+		std::this_thread::sleep_for(std::chrono::milliseconds(_stop_thread_wait_ms+_engine_wait_ms));
 	}
 }
 

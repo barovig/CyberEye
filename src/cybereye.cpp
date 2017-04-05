@@ -18,11 +18,11 @@ CyberEye::~CyberEye()
 
 void CyberEye::initialise()
 {
-	_model = cv::Ptr<ce::ObjCollection>(new ObjCollection());
-	_engine = cv::Ptr<ce::BkgSegmentationEngine>(new ce::BkgSegmentationEngine(_model, BkgSegmentationEngine::BKG_MOG2));
-	_tracker = cv::Ptr<ObjTracker>(new ce::ObjTracker());
-	_collector = cv::Ptr<ImgCollector>(new ce::ImgCollector());
-	//_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, _vcap_index));
+	_model = cv::Ptr<ObjCollection>(new ObjCollection());
+	_engine = cv::Ptr<BkgSegmentationEngine>(new BkgSegmentationEngine(_model, BkgSegmentationEngine::BKG_MOG2));
+	_tracker = cv::Ptr<ObjTracker>(new ObjTracker());
+	_collector = cv::Ptr<ImgCollector>(new ImgCollector());
+	_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, _vcap_index));
 }
 
 void CyberEye::start()
@@ -45,6 +45,11 @@ void CyberEye::getFrame(cv::Mat& frame)
 cv::Mat CyberEye::getMask()
 {
 	return _engine->getMask();
+}
+
+const std::vector<ImgObj> &CyberEye::getImages()
+{
+	return _model->getImgObjects();	
 }
 
 } // namespace ce

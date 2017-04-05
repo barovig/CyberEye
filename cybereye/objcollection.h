@@ -1,6 +1,7 @@
 #ifndef CE_OBJCOLLECTION_H
 #define CE_OBJCOLLECTION_H
 #include "collection.h"
+#include "opencv2/imgproc.hpp"
 
 namespace ce {
 
@@ -8,15 +9,17 @@ class ObjCollection : public ce::Collection
 {
 private:
 	std::vector<ce::ImgObj> _images;
+	long					_lastId = 1;
 public:
 	ObjCollection();
 	// Collection interface
-public:
-	void add(ImgObj img);
+	void add(cv::Mat& data, cv::Point point, cv::Size sz);
 	void remove(int id);
 	const std::vector<ce::ImgObj> &getImgObjects();
 	void updateLocation(int id, cv::Point location, cv::Size sz);
 	void updateLabel(int id, std::string label);
+private:
+	bool similar(const cv::Mat& input, const cv::Mat& I2);
 };
 
 } // namespace ce
