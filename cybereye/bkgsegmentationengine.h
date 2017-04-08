@@ -37,7 +37,7 @@ public:
 	// Base class overrides
 	// Segments 'frame' and populates _model with ImgObjs
     void segment(cv::Mat frame);
-	void supervisedSegment(cv::Mat frame, cv::InputArray input);
+	void setSupervisedInput(cv::InputArray input);
 	
 	int  getEngineWait();
 	

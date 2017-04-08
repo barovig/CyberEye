@@ -7,17 +7,87 @@ WatershedEngine::WatershedEngine(cv::Ptr<Collection> model) : Engine(model)
 	
 }
 
+
+
+void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
+{
+	//TODO: assert that _supervisedData is 8-bit single channel
+	
+	int compCount = 0;	
+	std::vector< std::vector<cv::Point> > contours;
+	std::vector< cv::Vec4i> hierarchy;
+	
+	// find contours in mask using 2-level retrieval mode and simple approximation method
+	cv::findContours(_supervisedData, contours, hierarchy, cv::RETR_CCOMP, cv::CHAIN_APPROX_SIMPLE);
+	
+	// make sure we found contours
+	if(contours.empty()) return;
+	
+	// create watershed markers mask same size and input data
+	cv::Mat markers(_supervisedData.size(), CV_32S);
+	markers = cv::Scalar::all(0);
+	
+	// draw contours from hierarchy into markers mask
+	int contourIdx = 0; // index of contour in top level of hierarchy. -1 denotes the last contour
+	for( ; contourIdx>= 0; contourIdx = hierarchy[contourIdx][0], compCount++)
+		cv::drawContours(markers, contours, contourIdx, cv::Scalar::all(compCount+1), -1, 8, hierarchy, INT_MAX);
+	
+	// make sure we drew components
+	if(compCount == 0) return;
+	
+	// vector of ROIs
+	std::vector< cv::Rect > rectangles;
+	
+	cv::watershed(frame,markers);
+	
+	// for each segmented image found
+	for(int i = 0; i < compCount; ++i)
+	{
+		// construct Mat same size and type as markers
+		cv::Mat mask(markers.size(), CV_32S);
+		
+		// construct range mask
+		cv::Mat range(markers.size(), CV_32S);
+		range = cv::Scalar::all(i+1);
+		
+		// populate the mask using range mask
+		cv::inRange(markers, range, range, mask);
+		
+		// get bounding rectangle and add to vector
+		// TODO: increase rectangle a bit
+		cv::Rect rec = cv::boundingRect(mask);
+		if(rec.size() != frame.size())		// if rectangle is same size as frame -> this is background
+		{	
+			// expand rectangle by 20%
+			cv::Size scale( rec.width * 0.2, rec.height * 0.2);
+			rec += scale;			
+			// shift center
+			cv::Point shift( scale.width / 2, scale.height / 2);
+			rec -= shift;
+			rectangles.push_back(rec);
+		}
+	}
+	
+	for(cv::Rect r : rectangles)
+	{
+		// extract region of interest
+		cv::Mat img(frame,r);
+		// add to model
+		_model->add(img, r.tl(), r.size());	
+	}
+}
+
+void WatershedEngine::WatershedEngine::setSupervisedInput(cv::InputArray input)
+{
+	// create a deep copy
+	input.getMat().copyTo(_supervisedData);
+}
+
+int WatershedEngine::WatershedEngine::getEngineWait()
+{
+	// no wait for supervised algo
+	return 0;
+}
+
 } // namespace ce
 
-
-void ce::WatershedEngine::segment(cv::Mat frame)
-{
-}
-
-void ce::WatershedEngine::supervisedSegment(cv::Mat frame, cv::InputArray input)
-{
-}
-
-int ce::WatershedEngine::getEngineWait()
-{
-}

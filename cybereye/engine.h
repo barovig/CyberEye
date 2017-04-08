@@ -13,7 +13,7 @@ class Engine
 {
 protected:
 	/**
-	 * @brief _model OpenCV smart pointer to the instance of Collection containing image objects.
+	 * @brief OpenCV smart pointer to the instance of Collection containing image objects.
 	 */
 	cv::Ptr<ce::Collection> _model;
 	
@@ -37,11 +37,10 @@ public:
     virtual void	segment(cv::Mat frame) = 0;
 	
 	/**
-	 * @brief supervisedSegment Pure virtual interface method, performs supervised image segmentation and populates Collection with extracted image obejcts.
-	 * @param frame cv::Mat object upon which to perform segmentation.
+	 * @brief Pure virtual interface method, sets data used in supervised image segmentation
 	 * @param input data used in supervised image segmentation.
 	 */
-	virtual void	supervisedSegment(cv::Mat frame, cv::InputArray input) = 0;
+	virtual void	setSupervisedInput(cv::InputArray input) = 0;
 	/**
 	 * @brief Pure virtual interface method, returns engine's wait time between individual segmentations.
 	 * @return int millieconds to wait between segmentations.

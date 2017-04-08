@@ -53,14 +53,12 @@ void BkgSegmentationEngine::segment(cv::Mat frame)
 			cv::rectangle(_mask,r, cv::Scalar(0xFF,0xFF,0xFF));
 			_model->add(data, r.tl(), r.size());
 		}
-		// add to model	
 	}
 	
 }
 
-void BkgSegmentationEngine::supervisedSegment(cv::Mat frame, cv::InputArray input)
+void BkgSegmentationEngine::setSupervisedInput(cv::InputArray input)
 {
-	
 }
 
 int BkgSegmentationEngine::getEngineWait()
