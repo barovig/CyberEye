@@ -2,7 +2,20 @@ cmake_minimum_required(VERSION 2.8)
 
 project(cybereye)
 find_package(OpenCV 3)
+find_package(Doxygen)
+
 include_directories(cybereye)
+
+if(DOXYGEN_FOUND)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+add_custom_target(
+	doc #ALL # - uncomment ALL to include doc generation in 'make all' target 
+	${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+	COMMENT "Generating API documentation with Doxygen" VERBATIM
+)
+endif(DOXYGEN_FOUND)
+
 set(HEADERS
 				# Interfaces
 				cybereye/collector.h
@@ -20,6 +33,7 @@ set(HEADERS
 				cybereye/objcollection.h
 				cybereye/objtracker.h
 				cybereye/imgcollector.h
+				cybereye/watershedengine.h
 	)
 set(SOURCES 
 				src/cybereye.cpp
@@ -33,6 +47,8 @@ set(SOURCES
 				src/objcollection.cpp
 				src/objtracker.cpp
 				src/imgcollector.cpp
+				src/watershedengine.cpp
+				
 ${HEADERS} #QtCreator hack to display headers
 	)
 add_library(cybereye ${SOURCES})

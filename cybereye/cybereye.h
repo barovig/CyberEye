@@ -7,6 +7,31 @@
 #include "bkgsegmentationengine.h"
 #include "opencv2/imgproc.hpp"
 
+/*! \mainpage CyberEye Documentation
+ *
+ * \section intro_sec Installation
+ *
+ * To install CyberEye use CMake to generate makefiles
+ *		
+ *		cmake ~/CyberEye
+ * 
+ * And then compile and install with
+ * 
+ *		make -j4
+ *		make install
+ * 
+ * \section custom_opencv Customising installation
+ * To use OpenCV different from the one installed locally, 
+ * set CMAKE_PREFIX_PATH to point to the directory containing OpenCV*.cmake files e.g.
+ *   
+ *		cmake -DCMAKE_PREFIX_PATH=/home/username/root/ ~/CyberEye
+ *
+ * To install CyberEye to location different to /usr/local,set CMAKE_INSTALL_PREFIX to install directory of choice e.g.
+ *
+ *		cmake -DCMAKE_INSTALL_PREFIX=/home/username/root/ ~/CyberEye
+ *
+ */
+
 namespace ce {
 
 class CyberEye

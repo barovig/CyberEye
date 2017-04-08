@@ -16,6 +16,9 @@ void CoreManager::capture()
 void CoreManager::segment()
 {
 	int wait = _engine->getEngineWait();
+	// if wait is zero - this is supervised segmenetation engine
+	if(wait == 0) return;
+	
 	while(!_engine_stop.load())
 	{
 		if(!_frame.empty())
