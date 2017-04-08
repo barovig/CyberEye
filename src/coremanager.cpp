@@ -23,7 +23,7 @@ void CoreManager::segment()
 			// Need a local copy, since _frame can be updated by
 			// video capturing thread
 			cv::Mat frame = _frame.clone();
-			_engine->fillImgObjects(frame);
+			_engine->segment(frame);
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait));
 		}
 	}
@@ -32,7 +32,7 @@ void CoreManager::segment()
 void CoreManager::segmentOnce()
 {
 	if(!_frame.empty())	
-		_engine->fillImgObjects(_frame);
+		_engine->segment(_frame);
 }
 
 CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracker> t) :

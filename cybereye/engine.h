@@ -9,11 +9,14 @@ class Engine
 {
 protected:
 	cv::Ptr<ce::Collection> _model;
+	
 public:
     Engine(cv::Ptr<Collection> model);
 	virtual			~Engine(){}
-    virtual void	fillImgObjects(cv::Mat frame) = 0;
+    virtual void	segment(cv::Mat frame) = 0;
+	virtual void	supervisedSegment(cv::Mat frame, cv::InputArray input) = 0;
 	virtual int		getEngineWait() = 0;
+	
 };
 
 } // namespace ce

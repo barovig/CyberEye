@@ -31,7 +31,7 @@ BkgSegmentationEngine::BkgSegmentationEngine(cv::Ptr<Collection> model, BkgSegme
 	createSubtractor();	
 }
 
-void BkgSegmentationEngine::fillImgObjects(cv::Mat frame)
+void BkgSegmentationEngine::segment(cv::Mat frame)
 {
 	static int itr = 0;
 	// apply gaussian blur first, with 5x5 kernel
@@ -55,6 +55,11 @@ void BkgSegmentationEngine::fillImgObjects(cv::Mat frame)
 		}
 		// add to model	
 	}
+	
+}
+
+void BkgSegmentationEngine::supervisedSegment(cv::Mat frame, cv::InputArray input)
+{
 	
 }
 
@@ -95,6 +100,7 @@ void BkgSegmentationEngine::setBlurParams(cv::Size sz, int sigmaX)
 	_kernel_sz = sz;
 }
 
+// connected components cleanup. (Kaehler & Bradski)
 void BkgSegmentationEngine::findConnectedComponents(cv::Mat &mask, std::vector<cv::Rect> &bbs, float perimScale)
 {
 	// morphological opening/closing to clear up small noise

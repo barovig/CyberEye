@@ -2,9 +2,9 @@
 
 namespace ce {
 
-Engine::Engine(cv::Ptr<Collection> model)
+Engine::Engine(cv::Ptr<Collection> model) : 
+	_model {model}
 {
-    _model = model;
 }
 
 } // namespace ce

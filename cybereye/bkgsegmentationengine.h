@@ -34,8 +34,10 @@ public:
     BkgSegmentationEngine(cv::Ptr<Collection> model);
 	BkgSegmentationEngine(cv::Ptr<Collection> model, Method method);
 	
+	// Base class overrides
 	// Segments 'frame' and populates _model with ImgObjs
-    void fillImgObjects(cv::Mat frame);
+    void segment(cv::Mat frame);
+	void supervisedSegment(cv::Mat frame, cv::InputArray input);
 	
 	int  getEngineWait();
 	
@@ -51,8 +53,6 @@ public:
 	void setBlurParams(cv::Size sz, int sigmaX);
 	
 private:
-	// connected components cleanup.
-	// Adapted from "Learning OpenCV 3" by Kaehler & Bradski
 	void findConnectedComponents(
 				cv::Mat&				mask,
 				std::vector<cv::Rect>&	bbs,
