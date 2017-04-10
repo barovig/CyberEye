@@ -20,8 +20,8 @@ void CyberEye::initialise()
 {
 	_model = cv::Ptr<ObjCollection>(new ObjCollection());
 	_engine = cv::Ptr<WatershedEngine>(new WatershedEngine(_model));
-	_tracker = cv::Ptr<ObjTracker>(new ObjTracker());
-	_collector = cv::Ptr<ImgCollector>(new ImgCollector());
+	_tracker = cv::Ptr<ObjTracker>(new ObjTracker(_model));
+	_collector = cv::Ptr<ImgCollector>(new ImgCollector(_model));
 	_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, _vcap_index));
 }
 

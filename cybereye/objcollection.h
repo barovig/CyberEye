@@ -2,6 +2,7 @@
 #define CE_OBJCOLLECTION_H
 #include "collection.h"
 #include "opencv2/imgproc.hpp"
+#include <array>
 
 namespace ce {
 
@@ -10,10 +11,11 @@ class ObjCollection : public ce::Collection
 private:
 	std::vector<ce::ImgObj> _images;
 	long					_lastId = 1;
+	
 public:
 	ObjCollection();
 	// Collection interface
-	void add(cv::Mat& data, cv::Point point, cv::Size sz);
+	void add(cv::Mat& data, cv::Rect rec);
 	void remove(int id);
 	const std::vector<ce::ImgObj> &getImgObjects();
 	void updateLocation(int id, cv::Point location, cv::Size sz);

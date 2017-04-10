@@ -2,8 +2,9 @@
 
 namespace ce {
 
-Collector::Collector()
+Collector::Collector(cv::Ptr<Collection> model)
 {
-
+	_model = model;
 }
+
 } // namespace ce

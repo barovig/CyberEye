@@ -80,7 +80,7 @@ void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
 	{
 		// extract region of interest
 		cv::Mat img(frame,r);
-		_model->add(img, r.tl(), r.size());	
+		_model->add(img, r);	
 	}
 }
 

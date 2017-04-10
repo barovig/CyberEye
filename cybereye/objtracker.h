@@ -7,7 +7,7 @@ namespace ce {
 class ObjTracker : public ce::Tracker
 {
 public:
-	ObjTracker();
+	ObjTracker(cv::Ptr<ce::Collection> model);
 };
 
 } // namespace ce

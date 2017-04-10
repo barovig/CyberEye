@@ -2,9 +2,9 @@
 
 namespace ce {
 
-Tracker::Tracker()
+Tracker::Tracker(cv::Ptr<ce::Collection> model)
 {
-	
+	_model = model;
 }
 
 } // namespace ce

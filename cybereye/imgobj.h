@@ -9,18 +9,23 @@ class ImgObj
 private:
 	cv::Mat						_img;
 	int							_id;
-    cv::Point					_loc;
-	cv::Size					_size;
-	std::vector<cv::Point>	_features;
+	cv::Rect					_boundRect;
+	std::vector<cv::Point>		_features;
 	
 public:
-    ImgObj(cv::Mat data, int id, cv::Point location, cv::Size size);
+    ImgObj(cv::Mat data, int id, cv::Rect rec);
     ImgObj(cv::Mat data, int id);
-	ImgObj(int id, cv::Point location, cv::Size size);
-	void setLocation(cv::Point loc);
-	void setSize(cv::Size size);
+	ImgObj(int id, cv::Point location);
+	
 	void setFeatures(std::vector<cv::Point> features);
+	std::vector<cv::Point> getFeatures();
+	
+	void setBoundingRect(cv::Rect rec);
+	cv::Rect getBoundingRect();
+	
+	int getId();
 	const cv::Mat& getImgData();
+
 };
 
 } // namespace ce
