@@ -10,10 +10,13 @@
 
 namespace ce {
 
-const int DEFAULT_ENGINE_TIMEOUT = 50;
-
+/**
+ * @brief The CoreManager class.
+ */
 class CoreManager
 {
+	
+	
 private:
 	// Core elements
 	cv::Ptr<Engine>		_engine;
@@ -21,9 +24,7 @@ private:
 	cv::Ptr<Tracker>	_tracker;
 	cv::VideoCapture	_vcap;
 	cv::Mat				_frame;
-	
-	//std::atomic<cv::Mat> _frame;
-	
+		
 	// flags and configs
 	std::atomic_bool _vcap_stop {false};	// note the use of initialiser instead of operator=
 	std::atomic_bool _engine_stop {false};
@@ -35,6 +36,8 @@ private:
 	// thread procedures
 	void capture();
 	void segment();
+	void track();
+	void collect();
 	
 	// helpers
 	void segmentOnce();

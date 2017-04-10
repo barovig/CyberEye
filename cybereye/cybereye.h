@@ -5,6 +5,7 @@
 #include "objtracker.h"
 #include "imgcollector.h"
 #include "bkgsegmentationengine.h"
+#include "watershedengine.h"
 #include "opencv2/imgproc.hpp"
 
 /*! \mainpage CyberEye Documentation
@@ -38,7 +39,7 @@ class CyberEye
 {
 private:
 	cv::Ptr<ce::CoreManager>			_manager;
-	cv::Ptr<ce::BkgSegmentationEngine>	_engine;
+	cv::Ptr<ce::WatershedEngine>	_engine;
 	cv::Ptr<ce::ImgCollector>			_collector;
 	cv::Ptr<ce::ObjTracker>				_tracker;
 	cv::Ptr<ce::ObjCollection>			_model;
@@ -50,11 +51,12 @@ public:
 	void initialise();
 	void start();
 	void stop();
+	void segment(cv::Mat mask);
+	
 	// pass frame as ouptut arg
 	void getFrame(cv::Mat& frame);
 	
 	// debugging methods
-	cv::Mat getMask();
 	const std::vector<ce::ImgObj>& getImages();
 };
 

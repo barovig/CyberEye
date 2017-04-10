@@ -40,13 +40,18 @@ public:
 	 * @brief Pure virtual interface method, sets data used in supervised image segmentation
 	 * @param input data used in supervised image segmentation.
 	 */
-	virtual void	setSupervisedInput(cv::InputArray input) = 0;
+	virtual void	setSupervisedInput(cv::Mat input) = 0;
 	/**
 	 * @brief Pure virtual interface method, returns engine's wait time between individual segmentations.
 	 * @return int millieconds to wait between segmentations.
 	 */
 	virtual int		getEngineWait() = 0;	// return zero if derived is supervised segmentaton
 	
+	/**
+	 * @brief Pure virtual interface method, sets the maximum area of bounding rectangle around segmented object
+	 * @param maxArea integer value for bounding rectangle's area
+	 */
+	virtual void setMaxObjectArea(int maxArea) = 0;
 };
 
 } // namespace ce

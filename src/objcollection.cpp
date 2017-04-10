@@ -38,6 +38,7 @@ void ObjCollection::ObjCollection::updateLabel(int id, std::string label)
 
 bool ObjCollection::similar(const cv::Mat &I1, const cv::Mat &I2)
 {
+	return false;
 	cv::Mat im1, im2;
 	I1.copyTo(im1);
 	I2.copyTo(im2);

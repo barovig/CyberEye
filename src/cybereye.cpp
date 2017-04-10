@@ -19,7 +19,7 @@ CyberEye::~CyberEye()
 void CyberEye::initialise()
 {
 	_model = cv::Ptr<ObjCollection>(new ObjCollection());
-	_engine = cv::Ptr<BkgSegmentationEngine>(new BkgSegmentationEngine(_model, BkgSegmentationEngine::BKG_MOG2));
+	_engine = cv::Ptr<WatershedEngine>(new WatershedEngine(_model));
 	_tracker = cv::Ptr<ObjTracker>(new ObjTracker());
 	_collector = cv::Ptr<ImgCollector>(new ImgCollector());
 	_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, _vcap_index));
@@ -37,14 +37,15 @@ void CyberEye::stop()
 	_manager->stopAllThreads();
 }
 
+void CyberEye::segment(cv::Mat mask)
+{
+	_engine->setSupervisedInput(mask);
+	_manager->triggerSegmentation();
+}
+
 void CyberEye::getFrame(cv::Mat& frame)
 {
 	_manager->getFrame(frame);
-}
-
-cv::Mat CyberEye::getMask()
-{
-	return _engine->getMask();
 }
 
 const std::vector<ImgObj> &CyberEye::getImages()

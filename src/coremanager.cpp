@@ -89,8 +89,12 @@ void CoreManager::startCapture()
 void CoreManager::startSegmentation()
 {
 	_engine_stop.store(false);
-	std::thread t(&CoreManager::segment, this);
-	t.detach();	
+	if(!_frame.empty())	// don't segment if no frames acquired
+	{
+		_engine->setMaxObjectArea((_frame.rows * _frame.cols) * 0.9);
+		std::thread t(&CoreManager::segment, this);
+		t.detach();	
+	}
 }
 
 void CoreManager::startTracking()
@@ -100,8 +104,12 @@ void CoreManager::startTracking()
 
 void CoreManager::triggerSegmentation()
 {
-	std::thread t(&CoreManager::segmentOnce, this);
-	t.detach();
+	if(!_frame.empty())	// don't segment if no frames acquired
+	{
+		_engine->setMaxObjectArea((_frame.rows * _frame.cols) * 0.9);
+		std::thread t(&CoreManager::segmentOnce, this);
+		t.detach();
+	}
 }
 
 void CoreManager::stopAllThreads()
