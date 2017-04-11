@@ -2,9 +2,9 @@
 #define CE_DISPATCHER_H
 #include "imgobj.h"
 #include "opencv2/core.hpp"
-#include <boost/serialization/binary_object.hpp>
 #include <boost/serialization/split_free.hpp>
 #include <boost/serialization/vector.hpp>
+BOOST_SERIALIZATION_SPLIT_FREE(::cv::Mat)
 
 namespace ce {
 
@@ -18,11 +18,10 @@ public:
 } // namespace cybeye
 
 // Mat serialisation
-BOOST_SERIALIZATION_SPLIT_FREE(::cv::Mat)
 namespace boost{
 namespace serialization{
     template<class Archive>
-    void save(Archive & ar, const ::cv::Mat& m, const unsigned int v)
+    void save(Archive & ar, const ::cv::Mat& m, const unsigned int)
     {
       size_t elem_sz = m.elemSize();
       size_t type = m.type();
@@ -36,7 +35,7 @@ namespace serialization{
       ar & boost::serialization::make_array(m.ptr(), data_sz);
     }
 	template<class Archive>
-    void load(Archive & ar, ::cv::Mat& m, const unsigned int v)
+    void load(Archive & ar, ::cv::Mat& m, const unsigned int)
     {
       int cols, rows;
       size_t elem_sz, type;

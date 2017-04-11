@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(cybereye)
 
+#enable C++11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 find_package(OpenCV 3 REQUIRED)
 find_package(Doxygen)
 find_package(Boost REQUIRED)
@@ -53,9 +57,7 @@ set(SOURCES
 ${HEADERS} #QtCreator hack to display headers
 	)
 add_library(cybereye ${SOURCES})
-#enable C++11
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 install(
 	TARGETS cybereye 
 	LIBRARY DESTINATION lib 
