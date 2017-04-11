@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(cybereye)
-find_package(OpenCV 3)
+find_package(OpenCV 3 REQUIRED)
 find_package(Doxygen)
-
+find_package(Boost REQUIRED)
 include_directories(cybereye)
 
 if(DOXYGEN_FOUND)
