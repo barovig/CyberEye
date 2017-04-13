@@ -10,15 +10,20 @@ private:
 	cv::Mat						_img;
 	int							_id;
 	cv::Rect					_boundRect;
-	std::vector<cv::Point>		_features;
+	std::vector<cv::Point2f>	_features;
 	
 public:
     ImgObj(cv::Mat data, int id, cv::Rect rec);
     ImgObj(cv::Mat data, int id);
 	ImgObj(int id, cv::Point location);
 	
-	void setFeatures(std::vector<cv::Point> features);
-	std::vector<cv::Point> getFeatures();
+	void setFeatures(std::vector<cv::Point2f> &features);
+	
+	/**
+	 * @brief getFeatures Returns a reference to feature vector of points
+	 * @return 
+	 */
+	std::vector<cv::Point2f> &getFeatures();
 	
 	void setBoundingRect(cv::Rect rec);
 	cv::Rect getBoundingRect();

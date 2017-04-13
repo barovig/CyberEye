@@ -39,7 +39,7 @@ class CyberEye
 {
 private:
 	cv::Ptr<ce::CoreManager>			_manager;
-	cv::Ptr<ce::WatershedEngine>	_engine;
+	cv::Ptr<ce::WatershedEngine>		_engine;
 	cv::Ptr<ce::ImgCollector>			_collector;
 	cv::Ptr<ce::ObjTracker>				_tracker;
 	cv::Ptr<ce::ObjCollection>			_model;

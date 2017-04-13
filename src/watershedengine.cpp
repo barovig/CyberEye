@@ -14,9 +14,12 @@ void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
 	//TODO: assert that _supervisedData is 8-bit single channel
 	
 	int compCount = 0;	
-	std::vector< std::vector<cv::Point> > contours;
+	std::vector< std::vector<cv::Point2i> > contours;
 	std::vector< cv::Vec4i> hierarchy;
 	
+	// make sure supervised data is set
+	if(_supervisedData.empty())
+		return;
 	// find contours in mask using 2-level retrieval mode and simple approximation method
 	cv::findContours(_supervisedData, contours, hierarchy, cv::RETR_CCOMP, cv::CHAIN_APPROX_SIMPLE);
 	

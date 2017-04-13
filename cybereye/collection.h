@@ -19,7 +19,7 @@ public:
 	virtual void remove(int id) = 0;
 	
 	// return a const reference to private vector of img objects.
-	virtual const std::vector<ce::ImgObj>& getImgObjects() = 0;
+	virtual std::vector<ce::ImgObj>& getImgObjects() = 0;
 	
 	// update location only through this method - used by Tracker
 	virtual void updateLocation(int id, cv::Point location, cv::Size sz) = 0;

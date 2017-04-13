@@ -11,6 +11,7 @@ protected:
 	cv::Ptr<ce::Collection> _model;
 public:
 	Tracker(cv::Ptr<ce::Collection> model);
+	virtual void track(const cv::Mat& frame) = 0;
 };
 
 } // namespace ce

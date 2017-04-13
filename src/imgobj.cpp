@@ -14,12 +14,14 @@ ImgObj::ImgObj(cv::Mat data, int id) :
 {
 }
 
-void ImgObj::setFeatures(std::vector<cv::Point> features)
+void ImgObj::setFeatures(std::vector<cv::Point2f> &features)
 {
-	_features = features;
+	_features.clear();
+	for(auto p : features)
+		_features.push_back(p);
 }
 
-std::vector<cv::Point> ImgObj::getFeatures()
+std::vector<cv::Point2f> &ImgObj::getFeatures()
 {
 	return _features;
 }

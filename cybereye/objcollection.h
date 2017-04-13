@@ -17,7 +17,7 @@ public:
 	// Collection interface
 	void add(cv::Mat& data, cv::Rect rec);
 	void remove(int id);
-	const std::vector<ce::ImgObj> &getImgObjects();
+	std::vector<ce::ImgObj> &getImgObjects();
 	void updateLocation(int id, cv::Point location, cv::Size sz);
 	void updateLabel(int id, std::string label);
 private:

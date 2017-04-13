@@ -23,7 +23,7 @@ void ObjCollection::ObjCollection::remove(int id)
 {
 }
 
-const std::vector<ce::ImgObj> &ObjCollection::ObjCollection::getImgObjects()
+std::vector<ImgObj> &ObjCollection::ObjCollection::getImgObjects()
 {
 	return _images;
 }
