@@ -19,7 +19,7 @@ protected:
 	/**
 	 * @brief Max area of bounding rectangle for segmented object. Used to differentiate between foreground and background objects
 	 */
-	int		_maxArea;
+	int		_maxArea = 0;
 public:
 	/**
 	 * @brief WatershedEngine constructor

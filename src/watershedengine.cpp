@@ -11,7 +11,7 @@ WatershedEngine::WatershedEngine(cv::Ptr<Collection> model) : Engine(model)
 
 void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
 {
-	//TODO: assert that _supervisedData is 8-bit single channel
+	CV_Assert(_supervisedData.type() == CV_8UC1);
 	
 	int compCount = 0;	
 	std::vector< std::vector<cv::Point2i> > contours;
@@ -91,6 +91,9 @@ void WatershedEngine::WatershedEngine::setSupervisedInput(cv::Mat input)
 {
 	// create a deep copy
 	input.copyTo(_supervisedData);
+	// set max area if not set
+	if(!_maxArea)
+		_maxArea = _supervisedData.size().area();
 }
 
 int WatershedEngine::WatershedEngine::getEngineWait()

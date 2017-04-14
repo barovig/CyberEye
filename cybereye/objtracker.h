@@ -15,6 +15,7 @@ protected:
 	const int		_lk_flags = 0;
 	const int		_lk_eig_thres = 0.001;
 	cv::Mat			_prev_frame;
+	int				_num_feature_thres = 3;
 	
 public:
 	ObjTracker(cv::Ptr<ce::Collection> model);

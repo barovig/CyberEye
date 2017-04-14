@@ -51,12 +51,21 @@ void ObjTracker::track(const cv::Mat &frame)
 									 status, errors, winSize, _lk_max_level, termcrit,
 									 _lk_flags, _lk_eig_thres);
 			
-			// update features and locations
-			img.setFeatures(newFeatures);
+			// sanity check - feature is in frame
+			cv::Rect frameRec(frame.size(), cv::Point(0,0));
+			features.clear();
+			for(auto& f : newFeatures)
+				if(frameRec.contains(f))
+					features.push_back(f);
+			
+			// update features and locations			
+			img.setFeatures(features);
 			cv::Rect rec = cv::boundingRect(newFeatures);
 			img.setBoundingRect(rec);
 		}
 	}
+	// update previous frame
+	cv::swap(grayFrame, _prev_frame);
 }
 
 } // namespace ce

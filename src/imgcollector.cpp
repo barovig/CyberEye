@@ -28,11 +28,16 @@ void ImgCollector::getFrame(const cv::Mat& input, cv::Mat& output)
 		cv::rectangle(output, img.getBoundingRect(), *pColour, 2);
 		
 		// print feature points
-		for(auto f : img.getFeatures())
-		{
-			cv::circle(output, f, 2, cv::Scalar(0,0,0) );
-		}
+		if(_print_features)
+			for(auto f : img.getFeatures())
+				cv::circle(output, f, 2, cv::Scalar(0,0,0) );
+		
 	}
+}
+
+void ImgCollector::setPrintFeatures(bool print)
+{
+	_print_features = print;
 }
 
 } // namespace ce

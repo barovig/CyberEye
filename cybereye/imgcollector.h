@@ -11,8 +11,10 @@ namespace ce {
 class ImgCollector : public ce::Collector
 {
 private:
-	cv::RNG					_rng;
-	std::map<int, cv::Ptr<cv::Scalar> > _colours;
+	cv::RNG								_rng;
+	std::map<int, 
+			cv::Ptr<cv::Scalar> >		_colours;
+	boolean								_print_features = false;
 public:
 	/**
 	 * @brief ImgCollector contructor
@@ -23,6 +25,7 @@ public:
 	// Collector interface
 public:
 	void getFrame(const cv::Mat& input, cv::Mat& output);
+	void setPrintFeatures(bool print);
 };
 
 } // namespace ce
