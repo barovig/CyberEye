@@ -1,6 +1,8 @@
 #ifndef CE_IMGOBJ_H
 #define CE_IMGOBJ_H
 #include "opencv2/core.hpp"
+#include <atomic>
+#include <mutex>
 
 namespace ce {
 
@@ -11,7 +13,9 @@ private:
 	int							_id;
 	cv::Rect					_boundRect;
 	std::vector<cv::Point2f>	_features;
-	
+	bool						_tracked = false;
+	int							_num_features {0};
+
 public:
     ImgObj(cv::Mat data, int id, cv::Rect rec);
     ImgObj(cv::Mat data, int id);
@@ -30,7 +34,8 @@ public:
 	
 	int getId();
 	const cv::Mat& getImgData();
-
+	bool isTracked();
+	int	 getNumFeatures();
 };
 
 } // namespace ce

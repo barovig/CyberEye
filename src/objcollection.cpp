@@ -9,7 +9,7 @@ ObjCollection::ObjCollection()
 
 void ObjCollection::ObjCollection::add(cv::Mat &data, cv::Rect rec)
 {
-	for(ImgObj img : _images)
+	for(ImgObj&	 img : _images)
 	{
 		if(similar(data, img.getImgData()))
 			return;
@@ -21,6 +21,12 @@ void ObjCollection::ObjCollection::add(cv::Mat &data, cv::Rect rec)
 
 void ObjCollection::ObjCollection::remove(int id)
 {
+	auto itr = _images.begin();
+	for( ; itr != _images.end(); itr++)
+		if(itr->getId() == id)
+			break;
+	_images.erase(itr);
+	
 }
 
 std::vector<ImgObj> &ObjCollection::ObjCollection::getImgObjects()

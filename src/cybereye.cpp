@@ -22,7 +22,9 @@ void CyberEye::initialise()
 	_engine = cv::Ptr<WatershedEngine>(new WatershedEngine(_model));
 	_tracker = cv::Ptr<ObjTracker>(new ObjTracker(_model));
 	_collector = cv::Ptr<ImgCollector>(new ImgCollector(_model));
-	_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, _vcap_index));
+	_recengine = cv::Ptr<RecognitionEngine>(new RecognitionEngine());	
+	_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, 
+													_recengine, _model, _vcap_index));
 }
 
 void CyberEye::start()
@@ -30,6 +32,7 @@ void CyberEye::start()
 	_manager->startCapture();
 	_manager->startSegmentation();
 	_manager->startTracking();
+	_manager->startMonitoring();
 }
 
 void CyberEye::stop()

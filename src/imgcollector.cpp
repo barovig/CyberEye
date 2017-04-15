@@ -10,7 +10,7 @@ ImgCollector::ImgCollector(cv::Ptr<ce::Collection> model) : ce::Collector(model)
 void ImgCollector::getFrame(const cv::Mat& input, cv::Mat& output)
 {
 	input.copyTo(output);
-	for(ce::ImgObj img : _model->getImgObjects())
+	for(ce::ImgObj& img : _model->getImgObjects())
 	{
 		int id = img.getId();
 		double r  = rand() % 255 + 1;

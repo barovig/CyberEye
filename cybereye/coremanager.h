@@ -6,7 +6,9 @@
 #include "tracker.h"
 #include "collector.h"
 #include "collection.h"
+#include "recognitionengine.h"
 #include <atomic>
+#include <set>
 
 namespace ce {
 
@@ -19,39 +21,52 @@ class CoreManager
 	
 private:
 	// Core elements
-	cv::Ptr<Engine>		_engine;
-	cv::Ptr<Collector>	_collector;
-	cv::Ptr<Tracker>	_tracker;
-	cv::VideoCapture	_vcap;
-	cv::Mat				_frame;
+	cv::Ptr<Engine>				_engine;
+	cv::Ptr<Collector>			_collector;
+	cv::Ptr<Tracker>			_tracker;
+	cv::Ptr<RecognitionEngine>	_recengine;
+	cv::Ptr<Collection>			_model;
+	cv::VideoCapture			_vcap;
+	cv::Mat						_frame;
 		
 	// flags and configs
 	std::atomic_bool _vcap_stop {false};	// note the use of initialiser instead of operator=
 	std::atomic_bool _engine_stop {false};
 	std::atomic_bool _collector_stop {false};
 	std::atomic_bool _tracker_stop {false};
+	std::atomic_bool _recengine_stop {false};
+	
 	int				 _engine_wait_ms;
 	int				 _stop_thread_wait_ms = 500; //wait half-second for threads to finish			
+	int				 _feature_thres = 3;
+	std::set<int>	 _monitor_ids;
+	std::mutex		 _tm_lock;	// tracker/montor lock
 	
 	// thread procedures
 	void capture();
 	void segment();
 	void track();
 	void collect();
+	void monitor();
 	
 	// helpers
 	void segmentOnce();
 	
 public:
-	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker);
-	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, int vcap);
-	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, cv::VideoCapture vcap);
+	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, 
+				cv::Ptr<RecognitionEngine> recengine, cv::Ptr<Collection> model);
+	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, 
+				cv::Ptr<RecognitionEngine> recengine, cv::Ptr<Collection> model, int vcap);
+	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, 
+				cv::Ptr<RecognitionEngine> recengine, cv::Ptr<Collection> model, cv::VideoCapture vcap);
 	~CoreManager();
 	
+	void setFeatureThreshold(int thres);	
 	void getFrame(cv::Mat& frame);
 	void startCapture();
 	void startSegmentation();
 	void startTracking();
+	void startMonitoring();
 	void triggerSegmentation();	
 	void stopAllThreads();
 	

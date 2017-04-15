@@ -4,6 +4,10 @@
 #include "opencv2/core.hpp"
 #include <boost/serialization/split_free.hpp>
 #include <boost/serialization/vector.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/asio.hpp>
+#include <boost/array.hpp>
 BOOST_SERIALIZATION_SPLIT_FREE(::cv::Mat)
 
 namespace ce {
@@ -11,9 +15,12 @@ namespace ce {
 // dispatcher interface
 class Dispatcher
 {
+private:
+	
 public:
 	virtual void dispatchObject(ce::ImgObj obj) = 0;
 };
+
 
 } // namespace cybeye
 

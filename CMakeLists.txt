@@ -39,6 +39,7 @@ set(HEADERS
 				cybereye/objtracker.h
 				cybereye/imgcollector.h
 				cybereye/watershedengine.h
+				cybereye/recognitionengine.h
 	)
 set(SOURCES 
 				src/cybereye.cpp
@@ -53,8 +54,8 @@ set(SOURCES
 				src/objtracker.cpp
 				src/imgcollector.cpp
 				src/watershedengine.cpp
-				
-${HEADERS} #QtCreator hack to display headers
+				src/recognitionengine.cpp
+				${HEADERS} #QtCreator hack to display headers
 	)
 add_library(cybereye ${SOURCES})
 

@@ -2,6 +2,7 @@
 #define CE_OBJCOLLECTION_H
 #include "collection.h"
 #include "opencv2/imgproc.hpp"
+#include <algorithm>
 #include <array>
 
 namespace ce {

@@ -7,7 +7,7 @@ void ObjectDispatcher::dispatchObject(ImgObj object)
 	
 }
 
-ObjectDispatcher::ObjectDispatcher()
+ObjectDispatcher::ObjectDispatcher() : Dispatcher()
 {
 	
 }

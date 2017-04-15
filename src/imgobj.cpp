@@ -16,9 +16,13 @@ ImgObj::ImgObj(cv::Mat data, int id) :
 
 void ImgObj::setFeatures(std::vector<cv::Point2f> &features)
 {
+	if(!_tracked) _tracked = true;
+		
 	_features.clear();
 	for(auto p : features)
 		_features.push_back(p);
+	_num_features = _features.size();
+	
 }
 
 std::vector<cv::Point2f> &ImgObj::getFeatures()
@@ -44,6 +48,16 @@ int ImgObj::getId()
 const cv::Mat &ImgObj::getImgData()
 {
 	return _img;
+}
+
+bool ImgObj::isTracked()
+{
+	return _tracked;
+}
+
+int ImgObj::getNumFeatures()
+{
+	return _num_features;
 }
 
 

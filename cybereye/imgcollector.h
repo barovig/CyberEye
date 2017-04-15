@@ -14,7 +14,7 @@ private:
 	cv::RNG								_rng;
 	std::map<int, 
 			cv::Ptr<cv::Scalar> >		_colours;
-	boolean								_print_features = false;
+	bool								_print_features = false;
 public:
 	/**
 	 * @brief ImgCollector contructor
