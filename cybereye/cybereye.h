@@ -58,7 +58,7 @@ public:
 	void getFrame(cv::Mat& frame);
 	
 	// debugging methods
-	const std::vector<ce::ImgObj>& getImages();
+	const std::vector<P_ImgObj> &getImages();
 };
 
 } // namespace ce

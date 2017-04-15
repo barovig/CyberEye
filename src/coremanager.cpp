@@ -1,7 +1,3 @@
-#include <thread>
-#include <chrono>
-#include <iostream>
-
 #include "coremanager.h"
 #include "opencv/cv.h"
  
@@ -138,23 +134,23 @@ void CoreManager::monitor()
 		
 		// scan model
 		std::vector<int> delIds;	// stores Ids of items to be deleted
-		for(ImgObj& img : _model->getImgObjects())
+		for(P_ImgObj& img : _model->getImgObjects())
 		{
 			// check if id is NOT in map
-			if(_monitor_ids.find(img.getId()) == _monitor_ids.end())
+			if(_monitor_ids.find(img->getId()) == _monitor_ids.end())
 			{
-				_monitor_ids.emplace(img.getId());	// new object arrived
+				_monitor_ids.emplace(img->getId());	// new object arrived
 				_recengine->recognise(img);
 			}
 			// check num features - synchronise!
 			_tm_lock.lock();
-			int numFeatures = img.getNumFeatures();
+			int numFeatures = img->getNumFeatures();
 			_tm_lock.unlock();
 			
-			if(numFeatures< _feature_thres && img.isTracked() )
+			if(numFeatures< _feature_thres && img->isTracked() )
 			{
 				// mark for deletion
-				delIds.push_back(img.getId());
+				delIds.push_back(img->getId());
 				continue;
 			}
 			// TODO: decide if need to check area of bounding rect

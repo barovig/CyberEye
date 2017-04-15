@@ -9,6 +9,9 @@
 #include "recognitionengine.h"
 #include <atomic>
 #include <set>
+#include <thread>
+#include <chrono>
+#include <iostream>
 
 namespace ce {
 

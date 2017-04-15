@@ -17,25 +17,25 @@ void ObjTracker::track(const cv::Mat &frame)
 	cv::TermCriteria termcrit(cv::TermCriteria::COUNT|cv::TermCriteria::EPS, 20, 0.03);
     cv::Size subPixWinSize(10,10), winSize(31,31);
 	
-	for(ce::ImgObj& img : _model->getImgObjects())	// use reference to modify
+	for(P_ImgObj& img : _model->getImgObjects())	// use reference to modify
 	{
-		std::vector<cv::Point2f> features = img.getFeatures();
+		std::vector<cv::Point2f> features = img->getFeatures();
 		std::vector<cv::Point2f> newFeatures;
 		// find features if empty		
 		if(features.empty())
 		{
 			// convert imgData to grayscale
 			cv::Mat grayImg;
-			cv::cvtColor(img.getImgData(), grayImg, cv::COLOR_BGR2GRAY);
+			cv::cvtColor(img->getImgData(), grayImg, cv::COLOR_BGR2GRAY);
 			// find features and clean up corners.
 			// NOTE: features are points relative to imgObj's data, not frame
 			cv::goodFeaturesToTrack(grayImg, features, _feature_count, _quality_level, _min_distance, cv::noArray());
 			cv::cornerSubPix(grayImg, features, subPixWinSize, cv::Size(-1,-1), termcrit);
 			
 			// translate feature points by top-left corner of rec
-			cv::Point2f tl = img.getBoundingRect().tl();
+			cv::Point2f tl = img->getBoundingRect().tl();
 			for(auto& f : features) f+= tl;
-			img.setFeatures(features);
+			img->setFeatures(features);
 		}
 		else
 		{
@@ -59,9 +59,9 @@ void ObjTracker::track(const cv::Mat &frame)
 					features.push_back(f);
 			
 			// update features and locations			
-			img.setFeatures(features);
+			img->setFeatures(features);
 			cv::Rect rec = cv::boundingRect(newFeatures);
-			img.setBoundingRect(rec);
+			img->setBoundingRect(rec);
 		}
 	}
 	// update previous frame

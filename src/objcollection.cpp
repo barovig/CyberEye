@@ -9,13 +9,13 @@ ObjCollection::ObjCollection()
 
 void ObjCollection::ObjCollection::add(cv::Mat &data, cv::Rect rec)
 {
-	for(ImgObj&	 img : _images)
+	for(P_ImgObj& img : _images)
 	{
-		if(similar(data, img.getImgData()))
+		if(similar(data, img->getImgData()))
 			return;
 	}
 	_lastId++;
-	ce::ImgObj imgObj(data, _lastId, rec);
+	P_ImgObj imgObj(new ImgObj(data, _lastId, rec));
 	_images.push_back(imgObj);
 }
 
@@ -23,13 +23,13 @@ void ObjCollection::ObjCollection::remove(int id)
 {
 	auto itr = _images.begin();
 	for( ; itr != _images.end(); itr++)
-		if(itr->getId() == id)
+		if((*itr)->getId() == id)
 			break;
 	_images.erase(itr);
 	
 }
 
-std::vector<ImgObj> &ObjCollection::ObjCollection::getImgObjects()
+std::vector<P_ImgObj> &ObjCollection::ObjCollection::getImgObjects()
 {
 	return _images;
 }

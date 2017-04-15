@@ -10,7 +10,7 @@ namespace ce {
 class ObjCollection : public ce::Collection
 {
 private:
-	std::vector<ce::ImgObj> _images;
+	std::vector<P_ImgObj> _images;
 	long					_lastId = 1;
 	
 public:
@@ -18,7 +18,7 @@ public:
 	// Collection interface
 	void add(cv::Mat& data, cv::Rect rec);
 	void remove(int id);
-	std::vector<ce::ImgObj> &getImgObjects();
+	std::vector<P_ImgObj> &getImgObjects();
 	void updateLocation(int id, cv::Point location, cv::Size sz);
 	void updateLabel(int id, std::string label);
 private:

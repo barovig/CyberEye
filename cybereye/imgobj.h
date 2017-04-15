@@ -38,6 +38,8 @@ public:
 	int	 getNumFeatures();
 };
 
+typedef cv::Ptr<ce::ImgObj> P_ImgObj;
+
 } // namespace ce
 
 #endif // CE_IMGOBJ_H

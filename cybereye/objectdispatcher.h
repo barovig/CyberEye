@@ -1,24 +1,66 @@
 #ifndef CE_OBJECTDISPATCHER_H
 #define CE_OBJECTDISPATCHER_H
 #include "dispatcher.h"
+#include "opencv2/core.hpp"
+#include <thread>
+#include <chrono>
+#include <iostream>
 
 namespace ce {
 
 class ObjectDispatcher : public ce::Dispatcher
 {
 private:
-//	boost::asio::io_service			_ios;
-//	std::string						_addr = "192.168.1.15";
-//	int								_port = 13491;
-//	boost::asio::ip::tcp::socket	_socket;
-//	boost::system::error_code		_err;
-//	const int HEADER_LENGTH = 8;
+	std::string						_addr = "192.168.1.15";
+	int								_port = 13491;
+	cv::Mat							_data;
+	cv::Ptr<ce::ImgObj>				_img;
+	const int HEADER_LENGTH = 8;
 public:
 	// interface realisation
-	void dispatchObject(ce::ImgObj object);
+	void dispatchObject(P_ImgObj object);
+	
+	// thread procedure
+	
+	void dispatch();
 	ObjectDispatcher();
 };
 
 } // namespace ce
 
+// Mat serialisation
+namespace boost{
+namespace serialization{
+    template<class Archive>
+    void save(Archive & ar, const ::cv::Mat& m, const unsigned int)
+    {
+      size_t elem_sz = m.elemSize();
+      size_t type = m.type();
+ 
+      ar & m.cols;
+      ar & m.rows;
+      ar & elem_sz;
+      ar & type;
+ 
+      const size_t data_sz = m.cols * m.rows * elem_sz;
+      ar & boost::serialization::make_array(m.ptr(), data_sz);
+    }
+	template<class Archive>
+    void load(Archive & ar, ::cv::Mat& m, const unsigned int)
+    {
+      int cols, rows;
+      size_t elem_sz, type;
+ 
+      ar & cols;
+      ar & rows;
+      ar & elem_sz;
+      ar & type;
+ 
+      m.create(rows, cols, type);
+ 
+      size_t data_size = m.cols * m.rows * elem_sz;
+      ar & boost::serialization::make_array(m.ptr(), data_size);	
+	}
+}
+}
 #endif // CE_OBJECTDISPATCHER_H

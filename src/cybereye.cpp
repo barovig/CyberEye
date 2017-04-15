@@ -51,7 +51,7 @@ void CyberEye::getFrame(cv::Mat& frame)
 	_manager->getFrame(frame);
 }
 
-const std::vector<ImgObj> &CyberEye::getImages()
+const std::vector<P_ImgObj> &CyberEye::getImages()
 {
 	return _model->getImgObjects();	
 }

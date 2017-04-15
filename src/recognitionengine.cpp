@@ -9,10 +9,23 @@ RecognitionEngine::RecognitionEngine()
 	
 }
 
-void RecognitionEngine::recognise(ImgObj &img)
+void RecognitionEngine::recognise(P_ImgObj &img)
 {
-	//DEBUG
-	std::cout << "Recognised image: " << img.getId() << std::endl;
+	if(_dispatcher != nullptr)	// remote engine
+	{
+		_dispatcher->dispatchObject(img);	
+	}
+	else						// local engine
+	{
+		//DEBUG
+		std::cout << "Recognised image local: " << img->getId() << std::endl;
+	}
+
+}
+
+void RecognitionEngine::setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher)
+{
+	_dispatcher = dispatcher;
 }
 
 } // namespace ce
