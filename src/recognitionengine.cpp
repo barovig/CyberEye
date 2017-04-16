@@ -18,7 +18,13 @@ void RecognitionEngine::recognise(P_ImgObj &img)
 	else						// local engine
 	{
 		//DEBUG
-		std::cout << "Recognised image local: " << img->getId() << std::endl;
+		std::cout << "Recognised image of area " << img->getImgData().size().area() << std::endl;
+		
+		// write image to file 
+		
+		// run recognition framework and save output
+		
+		// DONE. receiver will obtain result through getter
 	}
 
 }

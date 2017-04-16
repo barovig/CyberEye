@@ -12,31 +12,19 @@ void ObjReceiver::receiveObject(P_ImgObj obj)
 	CV_Assert(_engine != nullptr);
 	cv::Mat img;
 	
-	using namespace boost::asio::ip;	
-	// get img data
-	tcp::socket socket(_ios);
+	// wait for connection
+	boost::asio::ip::tcp::socket socket(_ios);
 	_acceptor.accept(socket);
-	boost::system::error_code err;
-	size_t data_sz = 0;
-	//  scope will close stream automatically 
-	{
-		socket.read_some(boost::asio::buffer(_buff_header), err);
-		std::istringstream is(std::string(_buff_header, ObjectDispatcher::HEADER_LENGTH));
-		if( !(is >> std::hex >> data_sz) )
-		{
-			err = boost::asio::error::invalid_argument;
-			std::cerr << err.message() << std::endl;
-			return;
-		}		
-	}
-	_buff_data.resize(data_sz);
+	// get img data
+	
 	// read actual data
+	std::string inbound_data = TcpChannel::readString(socket);
+	CV_Assert(inbound_data.size() != 0);
+	
+	// deserialise the string - use scope to close stream 
 	{
-		socket.read_some(boost::asio::buffer(_buff_data), err);
-		std::string archive_data(&_buff_data[0], _buff_data.size());
-		std::istringstream archive_is(archive_data);
+		std::istringstream archive_is(inbound_data);
 		boost::archive::text_iarchive arch(archive_is);
-		
 		arch >> img;
 	}	
 	
@@ -46,7 +34,8 @@ void ObjReceiver::receiveObject(P_ImgObj obj)
 	_engine->recognise(pImg);
 	std::string label = _engine->getRecognitionResult();
 	
-	// send this data back though same socket - header + data
+	// send this data back through same socket - header + data
+	TcpChannel::writeString(label, socket);
 }
 
 void ObjReceiver::setEngine(cv::Ptr<RecognitionEngine> engine)

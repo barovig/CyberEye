@@ -17,4 +17,9 @@
 #include "cybereye/objtracker.h"
 #include "cybereye/imgcollector.h"
 
+#include "cybereye/watershedengine.h"
+#include "cybereye/recognitionengine.h"
+#include "cybereye/objreceiver.h"
+#include "cybereye/tcpchannel.h"
+
 #endif // CE_H

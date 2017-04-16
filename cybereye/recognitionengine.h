@@ -11,10 +11,12 @@ class RecognitionEngine
 protected:
 	cv::Ptr<ObjectDispatcher> _dispatcher;
 	std::string				  _result;
+	std::string				  _img_path = "/tmp/img.jpg";
+	
 public:
 	RecognitionEngine();
-	void recognise(P_ImgObj &img);
-	void setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher);
+	void		recognise(P_ImgObj &img);
+	void		setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher);
 	std::string getRecognitionResult();
 };
 

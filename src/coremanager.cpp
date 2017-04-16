@@ -72,6 +72,12 @@ CoreManager::CoreManager(cv::Ptr<Engine> e, cv::Ptr<Collector> c, cv::Ptr<Tracke
 	_engine_wait_ms = e->getEngineWait();
 }
 
+CoreManager::CoreManager(cv::Ptr<Receiver> receiver, cv::Ptr<RecognitionEngine> engine) : 
+	_receiver{receiver}, _recengine{engine}
+{
+	
+}
+
 CoreManager::~CoreManager()
 {
 	//	stopAllThreads();

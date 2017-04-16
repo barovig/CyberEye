@@ -66,6 +66,7 @@ public:
 				cv::Ptr<RecognitionEngine> recengine, cv::Ptr<Collection> model, int vcap);
 	CoreManager(cv::Ptr<Engine> engine, cv::Ptr<Collector> collector, cv::Ptr<Tracker> tracker, 
 				cv::Ptr<RecognitionEngine> recengine, cv::Ptr<Collection> model, cv::VideoCapture vcap);
+	CoreManager(cv::Ptr<Receiver> receiver, cv::Ptr<RecognitionEngine> engine);
 	~CoreManager();
 	
 	void setFeatureThreshold(int thres);

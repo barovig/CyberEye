@@ -17,12 +17,8 @@ private:
 	int								_port = 13491;
 	boost::asio::io_service			_ios;	
 	boost::asio::ip::tcp::acceptor	_acceptor;
-	char							_buff_header[ObjectDispatcher::HEADER_LENGTH];
-	std::vector<char>				_buff_data;
-	std::string						_img_path = "/tmp/img.jpg";
 public:
 	ObjReceiver();
-	
 	// Receiver interface
 public:
 	void receiveObject(P_ImgObj obj);

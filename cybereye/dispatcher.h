@@ -1,6 +1,7 @@
 #ifndef CE_DISPATCHER_H
 #define CE_DISPATCHER_H
 #include "imgobj.h"
+#include "tcpchannel.h"
 #include "opencv2/core.hpp"
 #include <boost/serialization/split_free.hpp>
 #include <boost/serialization/vector.hpp>
@@ -19,6 +20,8 @@ class Dispatcher
 private:
 	
 public:
+	Dispatcher(){}
+	virtual ~Dispatcher(){}
 	virtual void dispatchObject(ce::ImgObj& obj) = 0;
 };
 
