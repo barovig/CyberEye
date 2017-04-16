@@ -10,11 +10,12 @@ class RecognitionEngine
 {
 protected:
 	cv::Ptr<ObjectDispatcher> _dispatcher;
+	std::string				  _result;
 public:
 	RecognitionEngine();
 	void recognise(P_ImgObj &img);
-	
 	void setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher);
+	std::string getRecognitionResult();
 };
 
 } // namespace ce

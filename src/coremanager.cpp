@@ -82,6 +82,11 @@ void CoreManager::setFeatureThreshold(int thres)
 	this->_feature_thres = thres;
 }
 
+void CoreManager::setReceiver(cv::Ptr<Receiver> recv)
+{
+	_receiver = recv;
+}
+
 void CoreManager::getFrame(cv::Mat& frame)
 {
 	// create local copy of current frame, before passing to Collector
@@ -126,6 +131,15 @@ void CoreManager::startMonitoring()
 	t.detach();
 }
 
+void CoreManager::startReceiving()
+{
+	if(_receiver != nullptr)
+	{
+		std::thread t(&CoreManager::receive, this);
+		t.detach();
+	}
+}
+
 void CoreManager::monitor()
 {
 	while(!_recengine_stop.load())
@@ -168,6 +182,15 @@ void CoreManager::monitor()
 	}	
 }
 
+void CoreManager::receive()
+{
+	while(!_receiver_stop.load())
+	{
+		P_ImgObj img;
+		_receiver->receiveObject(img);
+	}
+}
+
 void CoreManager::triggerSegmentation()
 {
 	if(!_frame.empty())	// don't segment if no frames acquired
@@ -184,13 +207,15 @@ void CoreManager::stopAllThreads()
 		 _vcap_stop.load() && 
 		 _collector_stop.load() &&
 		 _tracker_stop.load() && 
-		 _recengine_stop.load()))
+		 _recengine_stop.load() &&
+		 _receiver_stop.load()))
 	{
 		_engine_stop.store(true);
 		_vcap_stop.store(true);
 		_collector_stop.store(true);
 		_tracker_stop.store(true);
 		_recengine_stop.store(true);
+		_receiver_stop.store(true);
 		// give engine a chance to stop (sum of preset wait + engine wait)
 		std::this_thread::sleep_for(std::chrono::milliseconds(_stop_thread_wait_ms+_engine_wait_ms));
 	}

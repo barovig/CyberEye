@@ -7,7 +7,7 @@ namespace ce {
 class Receiver
 {
 public:
-	virtual void receiveObject(ce::ImgObj obj) = 0;
+	virtual void receiveObject(P_ImgObj obj) = 0;
 };
 
 } // namespace ce

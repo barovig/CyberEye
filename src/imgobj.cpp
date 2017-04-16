@@ -60,6 +60,11 @@ int ImgObj::getNumFeatures()
 	return _num_features;
 }
 
+void ImgObj::setLabel(std::string label)
+{
+	_label = label;
+}
+
 
 
 } // namespace ce

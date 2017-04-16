@@ -15,7 +15,7 @@ private:
 	std::vector<cv::Point2f>	_features;
 	bool						_tracked = false;
 	int							_num_features {0};
-
+	std::string					_label;
 public:
     ImgObj(cv::Mat data, int id, cv::Rect rec);
     ImgObj(cv::Mat data, int id);
@@ -36,6 +36,7 @@ public:
 	const cv::Mat& getImgData();
 	bool isTracked();
 	int	 getNumFeatures();
+	void setLabel(std::string label);
 };
 
 typedef cv::Ptr<ce::ImgObj> P_ImgObj;

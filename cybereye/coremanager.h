@@ -7,6 +7,7 @@
 #include "collector.h"
 #include "collection.h"
 #include "recognitionengine.h"
+#include "receiver.h"
 #include <atomic>
 #include <set>
 #include <thread>
@@ -28,6 +29,7 @@ private:
 	cv::Ptr<Collector>			_collector;
 	cv::Ptr<Tracker>			_tracker;
 	cv::Ptr<RecognitionEngine>	_recengine;
+	cv::Ptr<Receiver>			_receiver;
 	cv::Ptr<Collection>			_model;
 	cv::VideoCapture			_vcap;
 	cv::Mat						_frame;
@@ -38,7 +40,8 @@ private:
 	std::atomic_bool _collector_stop {false};
 	std::atomic_bool _tracker_stop {false};
 	std::atomic_bool _recengine_stop {false};
-	
+	std::atomic_bool _receiver_stop {false};
+
 	int				 _engine_wait_ms;
 	int				 _stop_thread_wait_ms = 500; //wait half-second for threads to finish			
 	int				 _feature_thres = 3;
@@ -51,6 +54,7 @@ private:
 	void track();
 	void collect();
 	void monitor();
+	void receive();
 	
 	// helpers
 	void segmentOnce();
@@ -64,12 +68,14 @@ public:
 				cv::Ptr<RecognitionEngine> recengine, cv::Ptr<Collection> model, cv::VideoCapture vcap);
 	~CoreManager();
 	
-	void setFeatureThreshold(int thres);	
+	void setFeatureThreshold(int thres);
+	void setReceiver(cv::Ptr<Receiver> recv);
 	void getFrame(cv::Mat& frame);
 	void startCapture();
 	void startSegmentation();
 	void startTracking();
 	void startMonitoring();
+	void startReceiving();
 	void triggerSegmentation();	
 	void stopAllThreads();
 	

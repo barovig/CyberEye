@@ -15,8 +15,9 @@ private:
 	int								_port = 13491;
 	cv::Mat							_data;
 	cv::Ptr<ce::ImgObj>				_img;
-	const int HEADER_LENGTH = 8;
 public:
+	static const int HEADER_LENGTH = 8;
+	
 	// interface realisation
 	void dispatchObject(P_ImgObj object);
 	

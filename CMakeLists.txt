@@ -40,6 +40,7 @@ set(HEADERS
 				cybereye/imgcollector.h
 				cybereye/watershedengine.h
 				cybereye/recognitionengine.h
+				cybereye/objreceiver.h
 	)
 set(SOURCES 
 				src/cybereye.cpp
@@ -55,6 +56,7 @@ set(SOURCES
 				src/imgcollector.cpp
 				src/watershedengine.cpp
 				src/recognitionengine.cpp
+				src/objreceiver.cpp
 				${HEADERS} #QtCreator hack to display headers
 	)
 add_library(cybereye ${SOURCES})

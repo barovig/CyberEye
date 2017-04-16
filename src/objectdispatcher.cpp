@@ -54,9 +54,31 @@ void ObjectDispatcher::dispatch()
 	socket.write_some(buffs, err);
 	
 	// WAIT for label data to come back
+	// local buffers and vars
+	char inbound_header[HEADER_LENGTH];
+	std::vector<char> inbound_data;
+	size_t data_sz = 0;	
+	
+	
+	{	// autoclose stream
+		socket.read_some(boost::asio::buffer(inbound_header), err);
+		std::istringstream is(std::string(inbound_header, HEADER_LENGTH));
+		if( !(is >> std::hex >> data_sz) )
+		{
+			err = boost::asio::error::invalid_argument;
+			std::cerr << err.message() << std::endl;
+			return;
+		}
+	}
+	
+	inbound_data.resize(data_sz);
+	// get data from socket
+	socket.read_some(boost::asio::buffer(inbound_data), err);
+	std::string inbound_label(&inbound_data[0], inbound_data.size());
 	
 	// set label for _img - CHECK IF STILL VALID!!!!!
-	
+	if(_img != nullptr)
+		_img->setLabel(inbound_label);
 }
 
 ObjectDispatcher::ObjectDispatcher() : Dispatcher()

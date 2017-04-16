@@ -28,4 +28,9 @@ void RecognitionEngine::setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher)
 	_dispatcher = dispatcher;
 }
 
+std::string RecognitionEngine::getRecognitionResult()
+{
+	return _result;
+}
+
 } // namespace ce

@@ -8,6 +8,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
+
 BOOST_SERIALIZATION_SPLIT_FREE(::cv::Mat)
 
 namespace ce {
