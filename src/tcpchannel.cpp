@@ -39,7 +39,7 @@ std::string TcpChannel::readString(boost::asio::ip::tcp::socket &socket)
 	size_t data_sz = 0;	
 	
 	// read data into header buffer and construct stream
-	socket.receive(boost::asio::buffer(buff_header));
+	boost::asio::read(socket, boost::asio::buffer(buff_header));
 	std::istringstream is(std::string(buff_header, HEADER_LENGTH));
 	if( !(is >> std::hex >> data_sz) )
 	{
@@ -50,7 +50,7 @@ std::string TcpChannel::readString(boost::asio::ip::tcp::socket &socket)
 	
 	buff_data.resize(data_sz);
 	// read actual data
-	socket.receive(boost::asio::buffer(buff_data));
+	boost::asio::read(socket, boost::asio::buffer(buff_data));
 	std::string data(&buff_data[0], buff_data.size());
 	
 	return data;	
