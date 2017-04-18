@@ -51,7 +51,7 @@ void ObjectDispatcher::dispatch()
 	}
 }
 
-ObjectDispatcher::ObjectDispatcher(std::__cxx11::string address, int port) : Dispatcher(),
+ObjectDispatcher::ObjectDispatcher(std::string address, int port) : Dispatcher(),
 	_addr {address}, _port{port}
 {
 	

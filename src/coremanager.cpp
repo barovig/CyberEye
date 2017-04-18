@@ -141,8 +141,10 @@ void CoreManager::startReceiving()
 {
 	if(_receiver != nullptr)
 	{
-		std::thread t(&CoreManager::receive, this);
-		t.detach();
+		// no point starting thread, it does job synchronously anyway
+//		std::thread t(&CoreManager::receive, this);
+//		t.detach();
+		receive();
 	}
 }
 
