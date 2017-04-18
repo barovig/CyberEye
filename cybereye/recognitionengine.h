@@ -13,11 +13,15 @@ namespace ce {
 
 class RecognitionEngine
 {
+private:
+public:
+	const int				  CMD_BUFSZ = 1024;
+	
 protected:
 	cv::Ptr<ObjectDispatcher> _dispatcher;
 	std::string				  _result;
 	std::string				  _img_path = "/tmp/img.jpg";
-	
+	std::string               _cmd;
 protected:
 	std::string runCmd(const char* cmd);
 	
@@ -25,6 +29,7 @@ public:
 	RecognitionEngine();
 	void		recognise(P_ImgObj &img);
 	void		setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher);
+	void		setCmd(std::string cmd);
 	std::string getRecognitionResult();
 };
 
