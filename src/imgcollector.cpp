@@ -31,9 +31,21 @@ void ImgCollector::getFrame(const cv::Mat& input, cv::Mat& output)
 		std::string label = img->getLabel();
 		if(label.size() != 0)
 		{
-			cv::putText(output, label, 
-						img->getBoundingRect().tl(),
-						cv::FONT_HERSHEY_SIMPLEX, 0.4, *pColour, 1);
+			std::stringstream sstream(label);
+			cv::Point origin(img->getBoundingRect().tl());
+			std::string text;
+			int baseline;
+			cv::Size txtSz = cv::getTextSize(text, cv::FONT_HERSHEY_SIMPLEX, 0.4, 1, &baseline);
+			
+			while(std::getline(sstream, text))
+			{
+				// remove opencv non-printable chars
+				text.erase(std::remove(text.begin(), text.end(), '\t'), 
+						   text.end());
+				origin.y+= txtSz.height+baseline;
+				cv::putText(output, text, origin,
+							cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0,230,230), 1);
+			}
 		}
 		// print feature points
 		if(_print_features)

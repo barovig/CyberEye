@@ -61,14 +61,14 @@ void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
 		cv::Rect rec = cv::boundingRect(mask);
 		if(rec.area() < _maxArea)		// if rectangle is same size as frame -> this is background
 		{	
-//			// expand rectangle by 20% if size is not too large
-//			int height = rec.height * 1.02;
-//			if(height < frame.rows) rec.height = height;
+			// expand rectangle by 20% if size is not too large
+			int height = rec.height * 1.02;
+			if(height < frame.rows) rec.height = height;
 			
-//			int width = rec.width * 1.02;
-//			if(width < frame.cols) rec.width = width;
+			int width = rec.width * 1.02;
+			if(width < frame.cols) rec.width = width;
 			
-//			// shift center, only if we won't go out of frame bounds
+			// shift center, only if we won't go out of frame bounds
 //			int x = rec.x - width / 2;
 //			if( x > 0) rec.x = x;
 			

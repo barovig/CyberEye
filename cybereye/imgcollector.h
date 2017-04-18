@@ -2,6 +2,7 @@
 #define CE_IMGCOLLECTOR_H
 #include <map>
 #include <random>
+#include <string>
 #include "collector.h"
 #include "opencv2/imgproc.hpp"
 
