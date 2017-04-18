@@ -22,7 +22,9 @@ void CyberEye::initialise()
 	_engine = cv::Ptr<WatershedEngine>(new WatershedEngine(_model));
 	_tracker = cv::Ptr<ObjTracker>(new ObjTracker(_model));
 	_collector = cv::Ptr<ImgCollector>(new ImgCollector(_model));
-	_recengine = cv::Ptr<RecognitionEngine>(new RecognitionEngine());	
+	_dispatcher = cv::Ptr<ObjectDispatcher>(new ObjectDispatcher("192.168.1.15", 13491));
+	_recengine = cv::Ptr<RecognitionEngine>(new RecognitionEngine());
+	_recengine->setDispatcher(_dispatcher);
 	_manager = cv::Ptr<CoreManager>(new CoreManager(_engine, _collector, _tracker, 
 													_recengine, _model, _vcap_index));
 }

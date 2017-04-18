@@ -2,7 +2,8 @@
 
 namespace ce {
 
-ObjReceiver::ObjReceiver() : 
+ObjReceiver::ObjReceiver(int port) : 
+	_port{port},
 	_acceptor(_ios, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), _port))
 {
 }

@@ -23,30 +23,36 @@ void ObjectDispatcher::dispatch()
 									boost::asio::ip::address::from_string(_addr), _port);
 	boost::asio::ip::tcp::socket	socket(ios);
 	
-	socket.connect(endpt);
-	
-	// create archive and stream
-	// NOTE: because binary_oarchive is non-portable, use text_archive
-    std::ostringstream archive_stream;
-    boost::archive::text_oarchive archive(archive_stream);	
-    archive << _data;
-    std::string outbound_data = archive_stream.str();	// string data to send
-	
-	// send data over channel
-	TcpChannel::writeString(outbound_data, socket);
-	
-	// WAIT for label data to come back
-	std::string inbound_label = TcpChannel::readString(socket);
-	
-	// dispatcher initiated connection -> close the socket now
-	socket.close();
-	
-	// set label for _img - CHECK IF PTR IS STILL VALID!!
-	if(_img != nullptr)
-		_img->setLabel(inbound_label);
+	try{
+		socket.connect(endpt);
+		
+		// create archive and stream
+		// NOTE: because binary_oarchive is non-portable, use text_archive
+		std::ostringstream archive_stream;
+		boost::archive::text_oarchive archive(archive_stream);	
+		archive << _data;
+		std::string outbound_data = archive_stream.str();	// string data to send
+		
+		// send data over channel
+		TcpChannel::writeString(outbound_data, socket);
+		
+		// WAIT for label data to come back
+		std::string inbound_label = TcpChannel::readString(socket);
+		
+		// dispatcher initiated connection -> close the socket now
+		socket.close();
+		
+		// set label for _img - CHECK IF PTR IS STILL VALID!!
+		if(_img != nullptr)
+			_img->setLabel(inbound_label);
+	}
+	catch(...){
+		std::cerr << "Error happened" << std::endl;
+	}
 }
 
-ObjectDispatcher::ObjectDispatcher() : Dispatcher()
+ObjectDispatcher::ObjectDispatcher(std::__cxx11::string address, int port) : Dispatcher(),
+	_addr {address}, _port{port}
 {
 	
 }

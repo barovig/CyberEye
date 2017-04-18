@@ -2,7 +2,12 @@
 #define RECOGNITIONENGINE_H
 #include "imgobj.h"
 #include "objectdispatcher.h"
+#include "opencv2/imgcodecs.hpp"
 #include <functional>
+#include <iostream>
+#include <stdexcept>
+#include <stdio.h>
+#include <string>
 
 namespace ce {
 
@@ -12,6 +17,9 @@ protected:
 	cv::Ptr<ObjectDispatcher> _dispatcher;
 	std::string				  _result;
 	std::string				  _img_path = "/tmp/img.jpg";
+	
+protected:
+	std::string runCmd(const char* cmd);
 	
 public:
 	RecognitionEngine();

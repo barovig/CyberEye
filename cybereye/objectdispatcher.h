@@ -8,11 +8,11 @@
 
 namespace ce {
 
-class ObjectDispatcher : public ce::Dispatcher
+class ObjectDispatcher : public Dispatcher
 {
 private:
-	std::string						_addr = "192.168.1.15";
-	int								_port = 13491;
+	std::string						_addr;
+	int								_port;
 	cv::Mat							_data;
 	cv::Ptr<ce::ImgObj>				_img;
 public:
@@ -24,7 +24,7 @@ public:
 	// thread procedure
 	
 	void dispatch();
-	ObjectDispatcher();
+	ObjectDispatcher(std::string address, int port);
 };
 
 } // namespace ce

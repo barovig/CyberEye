@@ -22,7 +22,7 @@ private:
 public:
 	Dispatcher(){}
 	virtual ~Dispatcher(){}
-	virtual void dispatchObject(ce::ImgObj& obj) = 0;
+	virtual void dispatchObject(P_ImgObj obj) = 0;
 };
 
 

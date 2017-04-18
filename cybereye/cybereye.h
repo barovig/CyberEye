@@ -42,6 +42,7 @@ private:
 	cv::Ptr<ce::WatershedEngine>		_engine;
 	cv::Ptr<ce::ImgCollector>			_collector;
 	cv::Ptr<ce::ObjTracker>				_tracker;
+	cv::Ptr<ce::ObjectDispatcher>		_dispatcher;
 	cv::Ptr<RecognitionEngine>			_recengine;	
 	cv::Ptr<ce::ObjCollection>			_model;
 	int									_vcap_index;

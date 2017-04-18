@@ -14,11 +14,11 @@ private:
 	cv::Ptr<ce::RecognitionEngine> _engine;
 	
 	// configs
-	int								_port = 13491;
+	int								_port;
 	boost::asio::io_service			_ios;	
 	boost::asio::ip::tcp::acceptor	_acceptor;
 public:
-	ObjReceiver();
+	ObjReceiver(int port);
 	// Receiver interface
 public:
 	void receiveObject(P_ImgObj obj);
