@@ -26,8 +26,8 @@ void ObjReceiver::receiveObject(P_ImgObj obj)
 	std::istringstream archive_is(inbound_data);
 	// deserialise the string - use scope to close stream 
 	{
-//		boost::archive::text_iarchive arch(archive_is);
-		boost::archive::binary_iarchive arch(archive_is);
+		boost::archive::text_iarchive arch(archive_is);
+//		boost::archive::binary_iarchive arch(archive_is);
 		
 		arch >> img;
 	}	
