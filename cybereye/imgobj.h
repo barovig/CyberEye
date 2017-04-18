@@ -37,6 +37,7 @@ public:
 	bool isTracked();
 	int	 getNumFeatures();
 	void setLabel(std::string label);
+	std::string getLabel();
 };
 
 typedef cv::Ptr<ce::ImgObj> P_ImgObj;

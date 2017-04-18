@@ -65,6 +65,11 @@ void ImgObj::setLabel(std::string label)
 	_label = label;
 }
 
+std::string ImgObj::getLabel()
+{
+	return this->_label;
+}
+
 
 
 } // namespace ce

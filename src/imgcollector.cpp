@@ -27,6 +27,14 @@ void ImgCollector::getFrame(const cv::Mat& input, cv::Mat& output)
 		
 		cv::rectangle(output, img->getBoundingRect(), *pColour, 2);
 		
+		// print label
+		std::string label = img->getLabel();
+		if(label.size() != 0)
+		{
+			cv::putText(output, label, 
+						img->getBoundingRect().tl(),
+						cv::FONT_HERSHEY_SIMPLEX, 0.4, *pColour, 1);
+		}
 		// print feature points
 		if(_print_features)
 			for(auto f : img->getFeatures())
