@@ -1,4 +1,6 @@
 #include "objectdispatcher.h"
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 
 namespace ce {
 
@@ -29,7 +31,8 @@ void ObjectDispatcher::dispatch()
 		// create archive and stream
 		// NOTE: because binary_oarchive is non-portable, use text_archive
 		std::ostringstream archive_stream;
-		boost::archive::text_oarchive archive(archive_stream);	
+//		boost::archive::text_oarchive archive(archive_stream);	
+		boost::archive::binary_oarchive archive(archive_stream);
 		archive << _data;
 		std::string outbound_data = archive_stream.str();	// string data to send
 		

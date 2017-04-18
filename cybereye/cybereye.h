@@ -46,6 +46,10 @@ private:
 	cv::Ptr<RecognitionEngine>			_recengine;	
 	cv::Ptr<ce::ObjCollection>			_model;
 	int									_vcap_index;
+	
+	// connection params
+	std::string							_ip;
+	int									_port;		
 public:
 	CyberEye();
 	CyberEye(int vcap);
@@ -60,6 +64,8 @@ public:
 	
 	// debugging methods
 	const std::vector<P_ImgObj> &getImages();
+	void setIP(std::string ip);
+	void setPort(int port);
 };
 
 } // namespace ce

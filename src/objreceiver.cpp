@@ -1,5 +1,6 @@
 #include "objreceiver.h"
-
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 namespace ce {
 
 ObjReceiver::ObjReceiver(int port) : 
@@ -22,13 +23,15 @@ void ObjReceiver::receiveObject(P_ImgObj obj)
 	std::string inbound_data = TcpChannel::readString(socket);
 	CV_Assert(inbound_data.size() != 0);
 	
+	std::istringstream archive_is(inbound_data);
 	// deserialise the string - use scope to close stream 
 	{
-		std::istringstream archive_is(inbound_data);
-		boost::archive::text_iarchive arch(archive_is);
+//		boost::archive::text_iarchive arch(archive_is);
+		boost::archive::binary_iarchive arch(archive_is);
+		
 		arch >> img;
 	}	
-	
+
 	// construct new ImgObject
 	P_ImgObj pImg(new ImgObj(img, 0));	//TODO: deal with ID!
 	// run recognition and get text data back
