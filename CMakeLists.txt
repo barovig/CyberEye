@@ -5,6 +5,7 @@ project(cybereye)
 #enable C++11
 set(CXX_STANDARD 11)
 set(CXX_STANDARD_REQUIRED ON)
+add_compile_options(-std=c++11)
 find_package(OpenCV 3 REQUIRED)
 find_package(Doxygen)
 find_package(Boost REQUIRED)
