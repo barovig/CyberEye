@@ -23,7 +23,7 @@ public:
 	
 	// thread procedure
 	
-	void dispatch();
+	void dispatch(P_ImgObj img);
 	ObjectDispatcher(std::string address, int port);
 };
 

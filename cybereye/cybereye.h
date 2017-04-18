@@ -63,9 +63,10 @@ public:
 	void getFrame(cv::Mat& frame);
 	
 	// debugging methods
-	const std::vector<P_ImgObj> &getImages();
+	const std::vector<P_ImgObj> getImages();
 	void setIP(std::string ip);
 	void setPort(int port);
+	void clearModel();
 };
 
 } // namespace ce

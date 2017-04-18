@@ -17,7 +17,7 @@ void ObjTracker::track(const cv::Mat &frame)
 	cv::TermCriteria termcrit(cv::TermCriteria::COUNT|cv::TermCriteria::EPS, 20, 0.03);
     cv::Size subPixWinSize(10,10), winSize(31,31);
 	
-	for(P_ImgObj& img : _model->getImgObjects())	// use reference to modify
+	for(P_ImgObj img : _model->getImgObjects())	// use reference to modify
 	{
 		std::vector<cv::Point2f> features = img->getFeatures();
 		std::vector<cv::Point2f> newFeatures;

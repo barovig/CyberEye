@@ -63,17 +63,26 @@ void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
 		{	
 			// expand rectangle by 20% if size is not too large
 			int height = rec.height * 1.02;
-			if(height < frame.rows) rec.height = height;
-			
+			int h_offset = rec.height * 0.2;
 			int width = rec.width * 1.02;
-			if(width < frame.cols) rec.width = width;
+			int w_offset = rec.width * 0.2;			
+			
+			if(rec.y + height < frame.rows && 
+					rec.x+width < frame.cols)
+			{
+				rec.height = height;
+				rec.width = width;
+			}
 			
 			// shift center, only if we won't go out of frame bounds
-//			int x = rec.x - width / 2;
-//			if( x > 0) rec.x = x;
+			int x = rec.x - w_offset / 2;
+			int y = rec.y - h_offset / 2;
 			
-//			int y = rec.y - height / 2;
-//			if( y > 0) rec.y = y;
+			if( x > 0 && y > 0)
+			{
+				rec.x = x;
+				rec.y = y;
+			}
 			
 			rectangles.push_back(rec);
 		}
@@ -82,8 +91,8 @@ void WatershedEngine::WatershedEngine::segment(cv::Mat frame)
 	for(cv::Rect r : rectangles)
 	{
 		// extract region of interest
-		cv::Mat img(frame,r);
-		_model->add(img, r);	
+		cv::Ptr<cv::Mat> pImg(new cv::Mat(frame,r));
+		_model->add(pImg, r);	
 	}
 }
 

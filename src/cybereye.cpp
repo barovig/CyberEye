@@ -53,7 +53,7 @@ void CyberEye::getFrame(cv::Mat& frame)
 	_manager->getFrame(frame);
 }
 
-const std::vector<P_ImgObj> &CyberEye::getImages()
+const std::vector<P_ImgObj> CyberEye::getImages()
 {
 	return _model->getImgObjects();	
 }
@@ -66,6 +66,11 @@ void CyberEye::setIP(std::string ip)
 void CyberEye::setPort(int port)
 {
 	_port = port;
+}
+
+void CyberEye::clearModel()
+{
+	_manager->clearModel();
 }
 
 } // namespace ce

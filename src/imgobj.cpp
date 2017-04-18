@@ -14,6 +14,7 @@ ImgObj::ImgObj(cv::Mat data, int id) :
 {
 }
 
+
 void ImgObj::setFeatures(std::vector<cv::Point2f> &features)
 {
 	if(!_tracked) _tracked = true;

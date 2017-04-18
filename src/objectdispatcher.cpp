@@ -7,17 +7,16 @@ namespace ce {
 void ObjectDispatcher::dispatchObject(P_ImgObj object)
 {
 	// init local data
-	object->getImgData().copyTo(_data);
-	_img = object;
+	//object->getImgData().copyTo(_data);
 	// start thread to send data	
-	std::thread t(&ObjectDispatcher::dispatch, this);
+	std::thread t(&ObjectDispatcher::dispatch, this, object);
 	t.detach();
 }
 
-void ObjectDispatcher::dispatch()
+void ObjectDispatcher::dispatch(P_ImgObj img)
 {
 	// no data to send
-	if(_data.empty()) return;
+	if(img->getImgData().empty() || img.empty()) return;
 	
 	// construct and open tcp socket
 	boost::asio::io_service			ios;
@@ -32,7 +31,7 @@ void ObjectDispatcher::dispatch()
 		std::ostringstream archive_stream;
 		boost::archive::text_oarchive archive(archive_stream);	
 //		boost::archive::binary_oarchive archive(archive_stream);
-		archive << _data;
+		archive << img->getImgData();
 		std::string outbound_data = archive_stream.str();	// string data to send
 		
 		// send data over channel
@@ -45,11 +44,11 @@ void ObjectDispatcher::dispatch()
 		socket.close();
 		
 		// set label for _img - CHECK IF PTR IS STILL VALID!!
-		if(_img != nullptr)
-			_img->setLabel(inbound_label);
+		if(img != nullptr)
+			img->setLabel(inbound_label);
 	}
-	catch(...){
-		std::cerr << "Error happened" << std::endl;
+	catch(std::exception e){
+		std::cerr << "Dispatcher error: " << e.what() << std::endl;
 	}
 }
 

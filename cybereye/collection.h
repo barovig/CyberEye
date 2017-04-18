@@ -15,11 +15,11 @@ public:
 	Collection() {}
 	virtual ~Collection(){}
 	
-	virtual void add(cv::Mat &img, cv::Rect ) = 0;
+	virtual void add(cv::Ptr<cv::Mat> img, cv::Rect ) = 0;
 	virtual void remove(int id) = 0;
-	
-	// return a const reference to private vector of img objects.
-	virtual std::vector<P_ImgObj>& getImgObjects() = 0;
+	virtual void clear() = 0;
+	// return a copy of private vector of img objects.
+	virtual std::vector<P_ImgObj> getImgObjects() = 0;
 	
 	// update location only through this method - used by Tracker
 	virtual void updateLocation(int id, cv::Point location, cv::Size sz) = 0;

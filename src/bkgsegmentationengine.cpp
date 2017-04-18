@@ -49,7 +49,7 @@ void BkgSegmentationEngine::segment(cv::Mat frame)
 		
 		// construct ImgObjects and
 		for(cv::Rect r : rectangles){
-			cv::Mat data(frame, r);
+			cv::Ptr<cv::Mat> data(new cv::Mat(frame, r));
 			cv::rectangle(_mask,r, cv::Scalar(0xFF,0xFF,0xFF));
 			_model->add(data, r);
 		}

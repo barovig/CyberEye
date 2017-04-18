@@ -9,7 +9,7 @@ RecognitionEngine::RecognitionEngine()
 	
 }
 
-void RecognitionEngine::recognise(P_ImgObj &img)
+void RecognitionEngine::recognise(P_ImgObj img)
 {
 	if(_dispatcher != nullptr)	// remote engine
 	{

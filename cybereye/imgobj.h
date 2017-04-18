@@ -19,7 +19,6 @@ private:
 public:
     ImgObj(cv::Mat data, int id, cv::Rect rec);
     ImgObj(cv::Mat data, int id);
-	ImgObj(int id, cv::Point location);
 	
 	void setFeatures(std::vector<cv::Point2f> &features);
 	

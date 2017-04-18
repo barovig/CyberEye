@@ -27,7 +27,7 @@ protected:
 	
 public:
 	RecognitionEngine();
-	void		recognise(P_ImgObj &img);
+	void		recognise(P_ImgObj img);
 	void		setDispatcher(cv::Ptr<ObjectDispatcher> dispatcher);
 	void		setCmd(std::string cmd);
 	std::string getRecognitionResult();

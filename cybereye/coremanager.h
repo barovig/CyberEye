@@ -77,7 +77,8 @@ public:
 	void startTracking();
 	void startMonitoring();
 	void startReceiving();
-	void triggerSegmentation();	
+	void triggerSegmentation();
+	void clearModel();
 	void stopAllThreads();
 	
 };

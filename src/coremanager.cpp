@@ -152,11 +152,11 @@ void CoreManager::monitor()
 {
 	while(!_recengine_stop.load())
 	{
-		if(_model == nullptr || _model.empty()) continue;
+		if(_model == nullptr || _model->getImgObjects().empty()) continue;
 		
 		// scan model
 		std::vector<int> delIds;	// stores Ids of items to be deleted
-		for(P_ImgObj& img : _model->getImgObjects())
+		for(P_ImgObj img : _model->getImgObjects())
 		{
 			// check if id is NOT in map
 			if(_monitor_ids.find(img->getId()) == _monitor_ids.end())
@@ -207,6 +207,11 @@ void CoreManager::triggerSegmentation()
 		std::thread t(&CoreManager::segmentOnce, this);
 		t.detach();
 	}
+}
+
+void CoreManager::clearModel()
+{
+	_model->clear();
 }
 
 void CoreManager::stopAllThreads()
