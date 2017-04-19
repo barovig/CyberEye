@@ -20,7 +20,7 @@ protected:
 public:
 	/**
 	 * @brief Engine constructor
-	 * @param Pointer to instance of Collection
+	 * @param model Pointer to instance of Collection
 	 */
     Engine(cv::Ptr<Collection> model);
 	

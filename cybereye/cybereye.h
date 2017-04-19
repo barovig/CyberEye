@@ -34,7 +34,11 @@
  */
 
 namespace ce {
-
+/**
+ * @brief The CyberEye class. This class acts as an abstraction for CoreManager. 
+ * It is responsible for creating and initialising pointers to individual components and passes messages 
+ * from client to CoreManager.
+ */
 class CyberEye
 {
 private:
@@ -51,22 +55,59 @@ private:
 	std::string							_ip;
 	int									_port;		
 public:
+	/**
+	 * @brief CyberEye default constructor.
+	 */
 	CyberEye();
+	/**
+	 * @brief CyberEye constructor 
+	 * @param vcap Specifies integer index of video capturing device to use.
+	 */
 	CyberEye(int vcap);
 	~CyberEye();
+	/**
+	 * @brief This method creates and initialises pointers to components, uses them to instansiate 
+	 * CoreManager object and sets everything up.
+	 */
 	void initialise();
+	/**
+	 * @brief Sends relevant messages to CoreManager to start individual threads.
+	 */
 	void start();
+	/**
+	 * @brief Stops all threads.
+	 */
 	void stop();
+	/**
+	 * @brief Performs image segmentation and sets input for supervised segmentation to mask.
+	 * @param mask Input cv::Mat object used in supervised segmentation
+	 */
 	void segment(cv::Mat mask);
 	
-	// pass frame as ouptut arg
+	/**
+	 * @brief Retrieves processed frame with detected image objects.
+	 * @param frame Reference to cv::Mat& where processed frame will be saved.
+	 */
 	void getFrame(cv::Mat& frame);
-	
-	// debugging methods
-	const std::vector<P_ImgObj> getImages();
+	/**
+	 * @brief Sets the IP of recognition server.
+	 * @param ip std::string with IPv4 address.
+	 */
 	void setIP(std::string ip);
+	/**
+	 * @brief Sets the port to use to send data.
+	 * @param port Integer value of port.
+	 */
 	void setPort(int port);
+	/**
+	 * @brief Clears all detected objects from central collection.
+	 */
 	void clearModel();
+	/**
+	 * @brief Debugging method. Returns vector of smart pointers to ImgObj's from the central collection.
+	 * @return 
+	 */
+	const std::vector<P_ImgObj> getImages();
 };
 
 } // namespace ce

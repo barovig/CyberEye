@@ -40,7 +40,7 @@ void BkgSegmentationEngine::segment(cv::Mat frame)
 	// perform background subtraction
 	_subtractor->apply(frame, _mask);
 	
-	if(++itr > NUM_ITERS_FOR_EXTRACT)
+	if(++itr > NUM_ITERS_TO_SKIP)
 	{
 		itr = 0;
 		// extract individual patches of frame based on mask

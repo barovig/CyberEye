@@ -5,27 +5,37 @@
 
 namespace ce {
 
+/**
+ * @brief The Collection class. An interface for centralised collection storing ImgObj-s.
+ */
 class Collection
 {
-private:
-
-protected:
-
 public:
+	/**
+	 * @brief Collection constructor.
+	 */
 	Collection() {}
+	/**
+	 * @brief ~Collection virtual destructor.
+	 */
 	virtual ~Collection(){}
-	
-	virtual void add(cv::Ptr<cv::Mat> img, cv::Rect ) = 0;
-	virtual void remove(int id) = 0;
+	/**
+	 * @brief Pure virtual method to add new objects to collection.
+	 */
+	virtual void add(cv::Ptr<cv::Mat>, cv::Rect ) = 0;
+	/**
+	 * @brief Pure virtual method to remove an item from collection.
+	 */
+	virtual void remove(int) = 0;
+	/**
+	 * @brief Pure virtual method to clear entire collection.
+	 */
 	virtual void clear() = 0;
-	// return a copy of private vector of img objects.
+	/**
+	 * @brief Pure virtual method returning a collection.
+	 * @return std::vector of smart pointers to ImgObj-s.
+	 */
 	virtual std::vector<P_ImgObj> getImgObjects() = 0;
-	
-	// update location only through this method - used by Tracker
-	virtual void updateLocation(int id, cv::Point location, cv::Size sz) = 0;
-	
-	// update label through this method only - used by RecognitionEngine
-	virtual void updateLabel(int id, std::string label) = 0;
 };
 
 } // namespace ce

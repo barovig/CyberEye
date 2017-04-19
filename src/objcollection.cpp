@@ -39,14 +39,6 @@ std::vector<P_ImgObj> ObjCollection::ObjCollection::getImgObjects()
 	return _images;
 }
 
-void ObjCollection::ObjCollection::updateLocation(int id, cv::Point location, cv::Size sz)
-{
-}
-
-void ObjCollection::ObjCollection::updateLabel(int id, std::string label)
-{
-}
-
 bool ObjCollection::similar(const cv::Mat &I1, const cv::Mat &I2)
 {
 	return false;

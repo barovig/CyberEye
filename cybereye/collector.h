@@ -5,10 +5,11 @@
 
 namespace ce {
 
+/**
+ * @brief The Collector class. An interface for image collector class used to output detected object data.
+ */
 class Collector
-{
-private:
-	
+{	
 protected:
 	/**
 	 * @brief OpenCV smart pointer to the instance of Collection containing image objects.
@@ -20,9 +21,10 @@ public:
 	 * @param model reference to Ptr to Collection
 	 */
 	Collector(cv::Ptr<ce::Collection> model);
-	
-	// gets original input frame
-    virtual void getFrame(const cv::Mat& input, cv::Mat& output) = 0;
+	/**
+	 * @brief Pure virtual method used to print image object data to screen.
+	 */
+    virtual void getFrame(const cv::Mat&, cv::Mat&) = 0;
 };
 
 } // namespace ce
