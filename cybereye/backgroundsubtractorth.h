@@ -3,9 +3,13 @@
 #include "opencv2/opencv.hpp"
 #include <vector>
 
+/**
+ * @brief The BackgroundSubtractorTH class. This class performs threshold-based
+ * background segmentation. UNSTABLE!
+ */
 class BackgroundSubtractorTH : public cv::BackgroundSubtractor
 {
-public:
+private:
 	cv::Mat IavgF, IdiffF, IprevF, IhiF, IlowF;
 	cv::Mat tmp, tmp2;
 	// Float, 1-channel images
@@ -28,11 +32,24 @@ public:
 	
 	
 public:
+	/**
+	 * @brief BackgroundSubtractorTH constructor.
+	 */
 	BackgroundSubtractorTH();
 	
 	// BackgroundSubtractor interface
 public:
+	/**
+	 * @brief OpenCV interface realisation. Applies background segmentation to frame and output foreground mask.
+	 * @param image 
+	 * @param fgmask
+	 * @param learningRate
+	 */
 	void apply(cv::InputArray image, cv::OutputArray fgmask, double learningRate = 0);
+	/**
+	 * @brief OpenCV interface realisation. Returns background image as OutputArray.
+	 * @param backgroundImage
+	 */
 	void getBackgroundImage(cv::OutputArray backgroundImage) const;
 };
 

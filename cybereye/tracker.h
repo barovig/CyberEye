@@ -11,6 +11,9 @@ namespace ce {
 class Tracker
 {
 protected:
+	/**
+	 * @brief _model A pointer to centralised Collection.
+	 */
 	cv::Ptr<ce::Collection> _model;
 public:
 	/**

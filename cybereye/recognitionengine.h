@@ -19,14 +19,34 @@ class RecognitionEngine
 {
 private:
 public:
+	/**
+	 * @brief CMD_BUFSZ Maximum size of command (chars).
+	 */
 	const int				  CMD_BUFSZ = 1024;
 	
 protected:
+	/**
+	 * @brief _dispatcher Smart pointer to ObjectDispatcher.
+	 */
 	cv::Ptr<ObjectDispatcher> _dispatcher;
+	/**
+	 * @brief _result Stores the result of recognition.
+	 */
 	std::string				  _result;
-	std::string				  _img_path = "/tmp/img.jpg";
+	/**
+	 * @brief _img_path Path where an image will be saved in filesystem.
+	 */
+	std::string				  _img_path;
+	/**
+	 * @brief _cmd Command for third-party recognition framework.
+	 */
 	std::string               _cmd;
 protected:
+	/**
+	 * @brief Executes third-party framework's command.
+	 * @param cmd A command to execute.
+	 * @return String with the command's output.
+	 */
 	std::string runCmd(const char* cmd);
 	
 public:
@@ -54,6 +74,11 @@ public:
 	 * @return A string with the output from recognition framework.
 	 */
 	std::string getRecognitionResult();
+	/**
+	 * @brief Sets the path to where temporary image will be saved in file system
+	 * @param path Full path where image can be saved.
+	 */
+	void setImgPath(std::string path);
 };
 
 } // namespace ce

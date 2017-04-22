@@ -45,6 +45,11 @@ std::string RecognitionEngine::getRecognitionResult()
 	return _result;
 }
 
+void RecognitionEngine::setImgPath(std::string path)
+{
+	_img_path = path;
+}
+
 std::string RecognitionEngine::runCmd(const char* cmd) {
     char buffer[CMD_BUFSZ];
     std::string result = "";
