@@ -8,7 +8,10 @@
 
 
 namespace ce {
-
+/**
+ * @brief The ImgCollector class. This class is responsible for producing processed frames 
+ * rom the object recognition results intended for final display in a client.
+ */
 class ImgCollector : public ce::Collector
 {
 private:
@@ -25,7 +28,16 @@ public:
 	
 	// Collector interface
 public:
+	/**
+	 * @brief A method that accepts raw frame as an input and draws borders and labels on it.
+	 * @param input Reference to raw cv::Mat frame
+	 * @param output Reference to output cv::Mat frame
+	 */
 	void getFrame(const cv::Mat& input, cv::Mat& output);
+	/**
+	 * @brief This method allows user to set flag whether tracked features should be displayed.
+	 * @param print Boolean flag.
+	 */
 	void setPrintFeatures(bool print);
 };
 

@@ -7,7 +7,10 @@
 #include <iostream>
 
 namespace ce {
-
+/**
+ * @brief The ObjectDispatcher class. This class dispatches ImgObj's to recognition server.
+ * It stores server's location and provides method to dispatch object and update the label.
+ */
 class ObjectDispatcher : public Dispatcher
 {
 private:
@@ -16,14 +19,30 @@ private:
 	cv::Mat							_data;
 	cv::Ptr<ce::ImgObj>				_img;
 public:
+	/**
+	 * @brief HEADER_LENGTH Defines the byte size of header used in TCP communication.
+	 */
 	static const int HEADER_LENGTH = 8;
 	
 	// interface realisation
+	/**
+	 * @brief Dispatcher interface. Sends the ImgObj to recognition server in separate thread.
+	 * @param object An object that needs to be recognised.
+	 */
 	void dispatchObject(P_ImgObj object);
 	
 	// thread procedure
-	
+	/**
+	 * @brief Thread procedure. Sends an ImgObj's to recognition server, waits for data to come back
+	 * and update label for an object.
+	 * @param img An object that needs to be recognised.
+	 */
 	void dispatch(P_ImgObj img);
+	/**
+	 * @brief ObjectDispatcher only constructor. Ensures that IP address and port of server is set.
+	 * @param address IP address as string.
+	 * @param port Port number as integer.
+	 */
 	ObjectDispatcher(std::string address, int port);
 };
 

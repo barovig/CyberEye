@@ -5,6 +5,10 @@
 
 namespace ce {
 
+/**
+ * @brief The ObjTracker class. This class encapsulates functionality used in tracking objects
+ * in ObjCollection between individual frames.
+ */
 class ObjTracker : public ce::Tracker
 {
 protected:
@@ -17,7 +21,15 @@ protected:
 	cv::Mat			_prev_frame;
 	
 public:
+	/**
+	 * @brief ObjTracker constructor.
+	 * @param model A smart pointer to collection.
+	 */
 	ObjTracker(cv::Ptr<ce::Collection> model);
+	/**
+	 * @brief Tracker interface. Tracks location changes of objects in ObjCollection.
+	 * @param frame A most recent frame where obejcts need to be tracked.
+	 */
 	void track(const cv::Mat& frame);
 };
 
