@@ -109,7 +109,7 @@ void BkgSegmentationEngine::findConnectedComponents(cv::Mat &mask, std::vector<c
 	std::vector< std::vector<cv::Point> > contours_all;
 	std::vector< std::vector<cv::Point> > contours;
 	// RETR_EXTERNAL - retrieve external contours, simple vert/horis approximation
-	cv::findContours(mask, contours_all, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+	cv::findContours(mask, contours_all, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 	
 	// remove too small contours
 	for(auto c : contours_all){
